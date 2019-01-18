@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' アセンブリ属性の値を確認します
 
 <Assembly: AssemblyTitle("ITToolKit")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("UNITCOM PC")>
+<Assembly: AssemblyDescription("IT管理委員支援ソフトウェアです。")>
+<Assembly: AssemblyCompany("nsip.org")>
 <Assembly: AssemblyProduct("ITToolKit")>
-<Assembly: AssemblyCopyright("Copyright © UNITCOM PC 2019")>
+<Assembly: AssemblyCopyright("Copyright © 2017-2019 nsip.org All Rights Reserved.")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
