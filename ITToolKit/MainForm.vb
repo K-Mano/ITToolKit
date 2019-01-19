@@ -50,10 +50,10 @@ Public Class MainForm
                 For Each mo As ManagementObject In moc
                     items(2, 1) = Convert.ToString(mo("SerialNumber"))
                 Next
-                items(5, 1) = "なし"
+                items(5, 1) = "False"
             Else
                 items(2, 1) = serial
-                items(5, 1) = "あり"
+                items(5, 1) = "True"
             End If
         Next
     End Sub
@@ -168,6 +168,12 @@ Public Class MainForm
             itemx.SubItems.Add(items(I, 1))
             ListView1.Items.Add(itemx)
         Next
+        ListView1.Items(0).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(1).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(2).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(3).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(4).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(5).SubItems(0).Font = New Font("Consolas", 9)
         ComboBox1.SelectedItem = "ESET"
     End Sub
 
@@ -184,6 +190,12 @@ Public Class MainForm
             itemx.SubItems.Add(items(I, 1))
             ListView1.Items.Add(itemx)
         Next
+        ListView1.Items(0).SubItems(1).Font = New Font("Consolas", 9)
+        ListView1.Items(1).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(2).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(3).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(4).SubItems(0).Font = New Font("Consolas", 9)
+        ListView1.Items(5).SubItems(0).Font = New Font("Consolas", 9)
     End Sub
 
     Private Sub CommandLink7_Click(sender As Object, e As EventArgs) Handles CommandLink7.Click
@@ -196,5 +208,16 @@ Public Class MainForm
         Else
             TextBox1.Enabled = True
         End If
+    End Sub
+
+    Private Sub CommandLink4_Click(sender As Object, e As EventArgs) Handles CommandLink4.Click
+        ReportPreview()
+        ReportExport()
+    End Sub
+    Private Sub ReportExport()
+
+    End Sub
+    Private Sub ReportPreview()
+        Report.Show()
     End Sub
 End Class

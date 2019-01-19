@@ -69,5 +69,15 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+        
+        '''<summary>
+        '''  型 System.Byte[] のローカライズされたリソースを検索します。
+        '''</summary>
+        Friend ReadOnly Property VL_PGothic_Regular() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("VL_PGothic_Regular", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
     End Module
 End Namespace
