@@ -32,7 +32,13 @@ Partial Class MainForm
         Me.CommandLink2 = New System.Windows.Forms.CommandLink()
         Me.CommandLink1 = New System.Windows.Forms.CommandLink()
         Me.InfoPage = New AeroWizard.WizardPage()
+        Me.CommandLink8 = New System.Windows.Forms.CommandLink()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -55,13 +61,14 @@ Partial Class MainForm
         Me.nonesys = New System.Windows.Forms.RadioButton()
         Me.CommandLink6 = New System.Windows.Forms.CommandLink()
         Me.FinishPage = New AeroWizard.WizardPage()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.CommandLink7 = New System.Windows.Forms.CommandLink()
         Me.CommandLink5 = New System.Windows.Forms.CommandLink()
         Me.CommandLink4 = New System.Windows.Forms.CommandLink()
-        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPage.SuspendLayout()
         Me.InfoPage.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.DataPage.SuspendLayout()
@@ -99,7 +106,7 @@ Partial Class MainForm
         Me.WizardControl1.Size = New System.Drawing.Size(631, 450)
         Me.WizardControl1.TabIndex = 0
         Me.WizardControl1.Text = "IT管理委員ToolKit"
-        Me.WizardControl1.Title = "IT管理委員ToolKit (PreRelease v1.0b)"
+        Me.WizardControl1.Title = "IT管理委員ToolKit (PreRelease v1.2b4)"
         Me.WizardControl1.TitleIcon = CType(resources.GetObject("WizardControl1.TitleIcon"), System.Drawing.Icon)
         '
         'MainPage
@@ -117,7 +124,7 @@ Partial Class MainForm
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(-3, 281)
+        Me.LinkLabel1.Location = New System.Drawing.Point(3, 281)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(75, 15)
         Me.LinkLabel1.TabIndex = 12
@@ -126,12 +133,13 @@ Partial Class MainForm
         '
         'CommandLink2
         '
+        Me.CommandLink2.Enabled = False
         Me.CommandLink2.Location = New System.Drawing.Point(3, 84)
         Me.CommandLink2.Name = "CommandLink2"
         Me.CommandLink2.Note = "ツール マネージャを起動します。"
         Me.CommandLink2.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink2.TabIndex = 11
-        Me.CommandLink2.Text = "その他のツール(&T)"
+        Me.CommandLink2.Text = "その他のツール(&T)(削除検討中)"
         Me.CommandLink2.UseVisualStyleBackColor = True
         '
         'CommandLink1
@@ -146,29 +154,95 @@ Partial Class MainForm
         '
         'InfoPage
         '
+        Me.InfoPage.AllowNext = False
+        Me.InfoPage.Controls.Add(Me.CommandLink8)
+        Me.InfoPage.Controls.Add(Me.GroupBox5)
         Me.InfoPage.Controls.Add(Me.GroupBox4)
         Me.InfoPage.Controls.Add(Me.GroupBox3)
         Me.InfoPage.Name = "InfoPage"
         Me.InfoPage.NextPage = Me.DataPage
+        Me.InfoPage.ShowNext = False
         Me.InfoPage.Size = New System.Drawing.Size(584, 296)
         Me.InfoPage.TabIndex = 4
         Me.InfoPage.Text = "レポートに必要な情報を入力"
         '
+        'CommandLink8
+        '
+        Me.CommandLink8.Location = New System.Drawing.Point(3, 218)
+        Me.CommandLink8.Name = "CommandLink8"
+        Me.CommandLink8.Note = "入力された情報をレポートに記録して続けます。"
+        Me.CommandLink8.Size = New System.Drawing.Size(550, 75)
+        Me.CommandLink8.TabIndex = 1
+        Me.CommandLink8.Text = "確定して次のステップへ進む"
+        Me.CommandLink8.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.ComboBox2)
+        Me.GroupBox5.Controls.Add(Me.Label5)
+        Me.GroupBox5.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.GroupBox5.Location = New System.Drawing.Point(3, 166)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(550, 48)
+        Me.GroupBox5.TabIndex = 3
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "記入者情報(IT管理委員)"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"(*未実装)", "真野 京介, 2I", "高橋 直樹, 2I", "宮本 圭一郎, 2I"})
+        Me.ComboBox2.Location = New System.Drawing.Point(252, 16)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(222, 23)
+        Me.ComboBox2.TabIndex = 2
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.Label5.Location = New System.Drawing.Point(18, 19)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(83, 15)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "記入者の名前 :"
+        '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.TextBox4)
+        Me.GroupBox4.Controls.Add(Me.Label7)
         Me.GroupBox4.Controls.Add(Me.TextBox2)
         Me.GroupBox4.Controls.Add(Me.Label3)
         Me.GroupBox4.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.GroupBox4.Location = New System.Drawing.Point(78, 86)
+        Me.GroupBox4.Location = New System.Drawing.Point(3, 83)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(394, 59)
+        Me.GroupBox4.Size = New System.Drawing.Size(550, 77)
         Me.GroupBox4.TabIndex = 2
         Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "その他"
+        Me.GroupBox4.Text = "使用者情報"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(252, 45)
+        Me.TextBox4.MaxLength = 7
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(222, 23)
+        Me.TextBox4.TabIndex = 6
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.Label7.Location = New System.Drawing.Point(18, 48)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(61, 15)
+        Me.Label7.TabIndex = 5
+        Me.Label7.Text = "学籍番号 :"
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(148, 21)
+        Me.TextBox2.Location = New System.Drawing.Point(252, 16)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(222, 23)
         Me.TextBox2.TabIndex = 2
@@ -177,11 +251,11 @@ Partial Class MainForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label3.Location = New System.Drawing.Point(18, 24)
+        Me.Label3.Location = New System.Drawing.Point(18, 19)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(61, 15)
+        Me.Label3.Size = New System.Drawing.Size(37, 15)
         Me.Label3.TabIndex = 1
-        Me.Label3.Text = "学籍番号 :"
+        Me.Label3.Text = "名前 :"
         '
         'GroupBox3
         '
@@ -190,16 +264,16 @@ Partial Class MainForm
         Me.GroupBox3.Controls.Add(Me.ComboBox1)
         Me.GroupBox3.Controls.Add(Me.Label1)
         Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.GroupBox3.Location = New System.Drawing.Point(78, 3)
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 0)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(394, 77)
+        Me.GroupBox3.Size = New System.Drawing.Size(550, 77)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "セキュリティ"
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(148, 45)
+        Me.TextBox1.Location = New System.Drawing.Point(252, 45)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(222, 23)
         Me.TextBox1.TabIndex = 3
@@ -219,8 +293,8 @@ Partial Class MainForm
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"ESET", "ウイルスバスタークラウド", "カスペルスキーセキュリティ", "ノートンセキュリティ", "Avast AntiVirus", "AVG AntiVirus", "Avira AntiVirus"})
-        Me.ComboBox1.Location = New System.Drawing.Point(148, 16)
+        Me.ComboBox1.Items.AddRange(New Object() {"ESET", "ウイルスバスタークラウド", "カスペルスキーセキュリティ", "ノートンセキュリティ", "Avast AntiVirus", "AVG AntiVirus", "Avira AntiVirus", "(その他)"})
+        Me.ComboBox1.Location = New System.Drawing.Point(252, 16)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(222, 23)
         Me.ComboBox1.TabIndex = 1
@@ -410,6 +484,18 @@ Partial Class MainForm
         Me.FinishPage.TabIndex = 3
         Me.FinishPage.Text = "セットアップが完了しました"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.Label4.Font = New System.Drawing.Font("Yu Gothic UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
+        Me.Label4.Location = New System.Drawing.Point(3, 3)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(437, 15)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "重要:使用者は必ずその他問題がないか確認してから申請書を提出するようにしてください。"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'CommandLink7
         '
         Me.CommandLink7.Location = New System.Drawing.Point(3, 183)
@@ -428,30 +514,18 @@ Partial Class MainForm
         Me.CommandLink5.Note = "許可願に直接データを印刷できる文書ファイルを出力します。"
         Me.CommandLink5.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink5.TabIndex = 17
-        Me.CommandLink5.Text = "PC持ち込み許可願に印刷(未実装/許可待ち)"
+        Me.CommandLink5.Text = "PC持ち込み許可願に印刷(未実装,検討中)"
         Me.CommandLink5.UseVisualStyleBackColor = True
         '
         'CommandLink4
         '
         Me.CommandLink4.Location = New System.Drawing.Point(3, 21)
         Me.CommandLink4.Name = "CommandLink4"
-        Me.CommandLink4.Note = "セットアップ レポートをテキスト形式(*.txt)で出力します。"
+        Me.CommandLink4.Note = "セットアップ レポートをpdf形式(*.pdf)で出力します。"
         Me.CommandLink4.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink4.TabIndex = 16
         Me.CommandLink4.Text = "セットアップ レポートの出力(未実装)"
         Me.CommandLink4.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label4.Font = New System.Drawing.Font("Yu Gothic UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
-        Me.Label4.Location = New System.Drawing.Point(3, 3)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(437, 15)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "重要:使用者は必ずその他問題がないか確認してから申請書を提出するようにしてください。"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MainForm
         '
@@ -470,6 +544,8 @@ Partial Class MainForm
         Me.MainPage.ResumeLayout(False)
         Me.MainPage.PerformLayout()
         Me.InfoPage.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -520,4 +596,10 @@ Partial Class MainForm
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents CommandLink8 As CommandLink
 End Class

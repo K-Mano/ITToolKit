@@ -145,8 +145,8 @@ Partial Class InfomationForm
         Me.TextBoxDescription.Size = New System.Drawing.Size(324, 132)
         Me.TextBoxDescription.TabIndex = 0
         Me.TextBoxDescription.TabStop = False
-        Me.TextBoxDescription.Text = "説明 :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(ランタイムに、ラベルのテキストはアプリケーションのアセンブリ情報に置き換えられます。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "プロジェクト デザイナーの [アプリケーション] ペイン" &
-    "で、アプリケーションのアセンブリ情報をカスタマイズします。)"
+        Me.TextBoxDescription.Text = "Developed by Mano Kyosuke" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Thanks for " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Takahashi Naoki (Planning/Cording)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Miyam" &
+    "oto Keiichiro(Planning)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'OKButton
         '

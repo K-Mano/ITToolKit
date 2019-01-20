@@ -11,6 +11,7 @@ Public Class MainForm
         {"OSバージョン", "Data4"},
         {"MACアドレス", "Data5"},
         {"シリアルナンバーの有無", "Data6"}}
+    Dim phythicsnumber As String
     Private Sub Maker()
         Dim scope As ManagementScope = New ManagementScope("root\cimv2")
         scope.Connect()
@@ -60,13 +61,14 @@ Public Class MainForm
     Private Sub OSVersion()
         items(3, 1) = My.Computer.Info.OSFullName
     End Sub
-    Private Sub MACAddress()
+    Public Sub MACAddress()
         Dim adapters As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
         For Each adapter As NetworkInterface In adapters
             If adapter.Name.Contains("Wi-Fi") Then
                 Dim ip_prop As IPInterfaceProperties = adapter.GetIPProperties()
                 ' MACアドレスの取得
                 Dim phy As PhysicalAddress = adapter.GetPhysicalAddress()
+                phythicsnumber = phy.ToString
                 Dim phymodified As String = phy.ToString()
                 phymodified = phymodified.Insert(2, ":")
                 phymodified = phymodified.Insert(5, ":")
@@ -107,17 +109,22 @@ Public Class MainForm
         End Try
     End Sub
     Private Sub SaveDataListForCSV()
+        phythicsnumber = phythicsnumber.Insert(2, ",")
+        phythicsnumber = phythicsnumber.Insert(5, ",")
+        phythicsnumber = phythicsnumber.Insert(8, ",")
+        phythicsnumber = phythicsnumber.Insert(11, ",")
+        phythicsnumber = phythicsnumber.Insert(14, ",")
         Dim itemx As ListViewItem = New ListViewItem()
         Try
             Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
             Dim sjisEnc As Encoding = Encoding.GetEncoding("Shift_JIS")
             Dim writer As StreamWriter = New StreamWriter(path, True, sjisEnc)
-            writer.WriteLine(items(0, 0) & "," & items(0, 1))
-            writer.WriteLine(items(1, 0) & "," & items(1, 1))
-            writer.WriteLine(items(2, 0) & "," & items(2, 1))
-            writer.WriteLine(items(3, 0) & "," & items(3, 1))
-            writer.WriteLine(items(4, 0) & "," & items(4, 1))
-            writer.WriteLine(items(5, 0) & "," & items(5, 1))
+            writer.WriteLine(items(0, 0) & ":," & items(0, 1))
+            writer.WriteLine(items(1, 0) & ":," & items(1, 1))
+            writer.WriteLine(items(2, 0) & ":," & items(2, 1))
+            writer.WriteLine(items(3, 0) & ":," & items(3, 1))
+            writer.WriteLine(items(4, 0) & ":," & phythicsnumber)
+            writer.WriteLine(items(5, 0) & ":," & items(5, 1))
             writer.Close()
         Catch ex As Exception
         End Try
@@ -147,8 +154,8 @@ Public Class MainForm
             Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 0")
         ElseIf actie.Checked Then
             Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 1")
-            Call ShellObj.run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyServer /t reg_sz /d proxy.anan-nct.ac.jp:8080")
-            Call ShellObj.run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyOverride /t reg_sz /d ""192.168.0.50;<local>""")
+            Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyServer /t reg_sz /d proxy.anan-nct.ac.jp:8080")
+            Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyOverride /t reg_sz /d ""192.168.0.50;<local>""")
         End If
         If nonesys.Checked Then
             Call ShellObj.Run("netsh winhttp reset proxy")
@@ -175,6 +182,7 @@ Public Class MainForm
         ListView1.Items(4).SubItems(0).Font = New Font("Consolas", 9)
         ListView1.Items(5).SubItems(0).Font = New Font("Consolas", 9)
         ComboBox1.SelectedItem = "ESET"
+        ComboBox2.SelectedItem = "(*未実装)"
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -190,7 +198,7 @@ Public Class MainForm
             itemx.SubItems.Add(items(I, 1))
             ListView1.Items.Add(itemx)
         Next
-        ListView1.Items(0).SubItems(1).Font = New Font("Consolas", 9)
+        ListView1.Items(0).SubItems(0).Font = New Font("Consolas", 9)
         ListView1.Items(1).SubItems(0).Font = New Font("Consolas", 9)
         ListView1.Items(2).SubItems(0).Font = New Font("Consolas", 9)
         ListView1.Items(3).SubItems(0).Font = New Font("Consolas", 9)
@@ -219,5 +227,14 @@ Public Class MainForm
     End Sub
     Private Sub ReportPreview()
         Report.Show()
+    End Sub
+
+    Private Sub CommandLink8_Click(sender As Object, e As EventArgs) Handles CommandLink8.Click
+        Dim antivirus As String = ComboBox1.SelectedItem
+        Dim license As String = TextBox1.Text
+        Dim name As String = TextBox2.Text
+        Dim number As String = TextBox4.Text
+        Dim itname As String = ComboBox2.SelectedItem
+        WizardControl1.NextPage()
     End Sub
 End Class

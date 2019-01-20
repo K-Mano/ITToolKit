@@ -12,7 +12,7 @@
         LabelVersion.Text = String.Format("バージョン PreRelease{0}b", My.Application.Info.Version.ToString)
         LabelCopyright.Text = My.Application.Info.Copyright
         LabelCompanyName.Text = My.Application.Info.CompanyName
-        TextBoxDescription.Text = My.Application.Info.Description
+        'TextBoxDescription.Text = My.Application.Info.Description
     End Sub
 
     Private Sub OKButton_Click(ByVal sender As Object, ByVal e As EventArgs) Handles OKButton.Click
