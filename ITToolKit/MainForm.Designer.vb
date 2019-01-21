@@ -29,7 +29,6 @@ Partial Class MainForm
         Me.WizardControl1 = New AeroWizard.WizardControl()
         Me.MainPage = New AeroWizard.WizardPage()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.CommandLink2 = New System.Windows.Forms.CommandLink()
         Me.CommandLink1 = New System.Windows.Forms.CommandLink()
         Me.InfoPage = New AeroWizard.WizardPage()
         Me.CommandLink8 = New System.Windows.Forms.CommandLink()
@@ -113,7 +112,6 @@ Partial Class MainForm
         '
         Me.MainPage.AllowNext = False
         Me.MainPage.Controls.Add(Me.LinkLabel1)
-        Me.MainPage.Controls.Add(Me.CommandLink2)
         Me.MainPage.Controls.Add(Me.CommandLink1)
         Me.MainPage.Name = "MainPage"
         Me.MainPage.NextPage = Me.InfoPage
@@ -130,17 +128,6 @@ Partial Class MainForm
         Me.LinkLabel1.TabIndex = 12
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "バージョン情報"
-        '
-        'CommandLink2
-        '
-        Me.CommandLink2.Enabled = False
-        Me.CommandLink2.Location = New System.Drawing.Point(3, 84)
-        Me.CommandLink2.Name = "CommandLink2"
-        Me.CommandLink2.Note = "ツール マネージャを起動します。"
-        Me.CommandLink2.Size = New System.Drawing.Size(550, 75)
-        Me.CommandLink2.TabIndex = 11
-        Me.CommandLink2.Text = "その他のツール(&T)(削除検討中)"
-        Me.CommandLink2.UseVisualStyleBackColor = True
         '
         'CommandLink1
         '
