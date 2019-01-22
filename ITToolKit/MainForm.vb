@@ -7,13 +7,6 @@ Imports iTextSharp.text.pdf
 Imports iText = iTextSharp.text
 Imports ClosedXML.Excel
 Public Class MainForm
-    Dim items(,) As String = {
-        {"メーカー", ""},
-        {"機種", ""},
-        {"シリアルナンバー", ""},
-        {"OSバージョン", ""},
-        {"MACアドレス", ""},
-        {"シリアルナンバーの有無", ""}}
     Dim phythicsnumber As String
     Dim dtNow As Date = Date.Now
     Dim antivirus As String
@@ -22,6 +15,13 @@ Public Class MainForm
     Dim license As String
     Dim number As String
     Dim filename As String
+    Dim items(,) As String = {
+        {"メーカー", ""},
+        {"機種", ""},
+        {"シリアルナンバー", ""},
+        {"OSバージョン", ""},
+        {"MACアドレス", ""},
+        {"シリアルナンバーの有無", ""}}
     Private Sub Maker()
         Dim scope As ManagementScope = New ManagementScope("root\cimv2")
         scope.Connect()
@@ -108,14 +108,12 @@ Public Class MainForm
             Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
             Dim sjisEnc As Encoding = Encoding.GetEncoding("Shift_JIS")
             Dim writer As StreamWriter = New StreamWriter(path, True, sjisEnc)
-            writer.WriteLine(items(0, 0) & ":" & items(0, 1))
-            writer.WriteLine(items(1, 0) & ":" & items(1, 1))
-            writer.WriteLine(items(2, 0) & ":" & items(2, 1))
-            writer.WriteLine(items(3, 0) & ":" & items(3, 1))
-            writer.WriteLine(items(4, 0) & ":" & items(4, 1))
-            writer.WriteLine(items(5, 0) & ":" & items(5, 1))
+            For I As Integer = 0 To 5
+                writer.WriteLine(items(I, 0) & ":" & items(I, 1))
+            Next
             writer.Close()
         Catch ex As Exception
+            MessageBox.Show("ファイルの保存に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub SaveDataListForCSV()
@@ -129,14 +127,14 @@ Public Class MainForm
             Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
             Dim sjisEnc As Encoding = Encoding.GetEncoding("Shift_JIS")
             Dim writer As StreamWriter = New StreamWriter(path, True, sjisEnc)
-            writer.WriteLine(items(0, 0) & ":," & items(0, 1))
-            writer.WriteLine(items(1, 0) & ":," & items(1, 1))
-            writer.WriteLine(items(2, 0) & ":," & items(2, 1))
-            writer.WriteLine(items(3, 0) & ":," & items(3, 1))
+            For I As Integer = 0 To 3
+                writer.WriteLine(items(I, 0) & ":," & items(I, 1))
+            Next
             writer.WriteLine(items(4, 0) & ":," & phythicsnumber)
             writer.WriteLine(items(5, 0) & ":," & items(5, 1))
             writer.Close()
         Catch ex As Exception
+            MessageBox.Show("ファイルの保存に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub SaveDataListForXLSX()
@@ -176,7 +174,7 @@ Public Class MainForm
             objSheet.Range("G5").Value = destArr(5)
             objWBook.SaveAs(path)
         Catch ex As Exception
-
+            MessageBox.Show("ファイルの保存に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -195,20 +193,24 @@ Public Class MainForm
     End Sub
 
     Private Sub CommandLink6_Click(sender As Object, e As EventArgs) Handles CommandLink6.Click
-        Dim ShellObj
-        ShellObj = CreateObject("WScript.Shell")
-        If noneie.Checked Then
-            Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 0")
-        ElseIf actie.Checked Then
-            Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 1")
-            Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyServer /t reg_sz /d proxy.anan-nct.ac.jp:8080")
-            Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyOverride /t reg_sz /d ""192.168.0.50;<local>""")
-        End If
-        If nonesys.Checked Then
-            Call ShellObj.Run("netsh winhttp reset proxy")
-        ElseIf actsys.Checked Then
-            Call ShellObj.Run("netsh winhttp set proxy proxy-server=""proxy.anan-nct.ac.jp:8080"" bypass-list=""192.168.0.50""")
-        End If
+        Try
+            Dim ShellObj
+            ShellObj = CreateObject("WScript.Shell")
+            If noneie.Checked Then
+                Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 0")
+            ElseIf actie.Checked Then
+                Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 1")
+                Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyServer /t reg_sz /d proxy.anan-nct.ac.jp:8080")
+                Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyOverride /t reg_sz /d ""192.168.0.50;<local>""")
+            End If
+            If nonesys.Checked Then
+                Call ShellObj.Run("netsh winhttp reset proxy")
+            ElseIf actsys.Checked Then
+                Call ShellObj.Run("netsh winhttp set proxy proxy-server=""proxy.anan-nct.ac.jp:8080"" bypass-list=""192.168.0.50""")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("プロキシの設定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadSettings()
@@ -218,17 +220,13 @@ Public Class MainForm
         SerialNumber()
         MACAddress()
         For I As Integer = 0 To (items.Length \ items.Rank) - 1
-            Dim itemx As New ListViewItem
-            itemx.Text = items(I, 0)
+            Dim itemx As New ListViewItem With {.Text = items(I, 0)}
             itemx.SubItems.Add(items(I, 1))
             ListView1.Items.Add(itemx)
         Next
-        ListView1.Items(0).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(1).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(2).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(3).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(4).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(5).SubItems(0).Font = New Font("Consolas", 9)
+        For L As Integer = 0 To 5
+            ListView1.Items(L).SubItems(0).Font = New Font("Consolas", 9)
+        Next
         ComboBox1.SelectedItem = "ESET"
     End Sub
 
@@ -240,17 +238,13 @@ Public Class MainForm
         SerialNumber()
         MACAddress()
         For I As Integer = 0 To (items.Length \ items.Rank) - 1
-            Dim itemx As New ListViewItem
-            itemx.Text = items(I, 0)
+            Dim itemx As New ListViewItem With {.Text = items(I, 0)}
             itemx.SubItems.Add(items(I, 1))
             ListView1.Items.Add(itemx)
         Next
-        ListView1.Items(0).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(1).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(2).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(3).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(4).SubItems(0).Font = New Font("Consolas", 9)
-        ListView1.Items(5).SubItems(0).Font = New Font("Consolas", 9)
+        For L As Integer = 0 To 5
+            ListView1.Items(L).SubItems(0).Font = New Font("Consolas", 9)
+        Next
     End Sub
 
     Private Sub CommandLink7_Click(sender As Object, e As EventArgs) Handles CommandLink7.Click
@@ -274,43 +268,64 @@ Public Class MainForm
     End Sub
 
     Private Sub CommandLink8_Click(sender As Object, e As EventArgs) Handles CommandLink8.Click
-        antivirus = ComboBox1.SelectedItem
-        license = TextBox1.Text
-        username = TextBox2.Text
-        number = TextBox4.Text
-        itname = ComboBox2.SelectedItem
-        WizardControl1.NextPage()
+        If TextBox2.TextLength > 0 And TextBox4.TextLength = 7 Then
+            If ComboBox1.SelectedItem = "ESET" Then
+                antivirus = ComboBox1.SelectedItem
+                license = TextBox1.Text
+                username = TextBox2.Text
+                number = TextBox4.Text
+                itname = ComboBox2.SelectedItem
+                WizardControl1.NextPage()
+            Else
+                If TextBox1.TextLength > 0 Then
+                    antivirus = ComboBox1.SelectedItem
+                    license = TextBox1.Text
+                    username = TextBox2.Text
+                    number = TextBox4.Text
+                    itname = ComboBox2.SelectedItem
+                    WizardControl1.NextPage()
+                Else
+                    MessageBox.Show("必要事項を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End If
+        Else
+            MessageBox.Show("必要事項を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
     Public Sub CreatePdf(savepath As String)
-        Dim savefolder As String = "\Reports"
-        Dim savedirectory As String = My.Application.Info.DirectoryPath & savefolder
-        Directory.CreateDirectory(savedirectory)
-        Dim doc = New iText.Document()
-        Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream(savepath, FileMode.Create))
-        doc.Open()
-        Dim cb As PdfContentByte = writer.DirectContent
-        Dim basefont As BaseFont = BaseFont.CreateFont("C:\Windows\Fonts\meiryo.ttc,0", BaseFont.IDENTITY_H, True)
-        cb.BeginText()
-        cb.SetFontAndSize(basefont, 14)
-        'レポートの内容
-        cb.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "ITToolKit Setup Report (" & Date.Today & ")", 150, 800, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "------------------------------------------------------------------------------------------", 20, 785, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "*管理情報", 20, 765, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "申請を受け付けたIT管理委員:     " & itname, 20, 745, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "PC所有者:                       " & username, 20, 725, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "学籍番号:                       " & number, 20, 705, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "使用しているウイルス対策ソフト: " & antivirus, 20, 685, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "ライセンスキー:                 " & license, 20, 665, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "------------------------------------------------------------------------------------------", 20, 645, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "*システム情報", 20, 625, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(0, 0) & ":                       " & items(0, 1), 20, 605, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(1, 0) & ":                             " & items(1, 1), 20, 585, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(2, 0) & ":           " & items(2, 1), 20, 565, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(3, 0) & ":                " & items(3, 1), 20, 545, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(4, 0) & ":                " & items(4, 1), 20, 525, 0)
-        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(5, 0) & ":  " & items(5, 1), 20, 505, 0)
-        cb.EndText()
-        doc.Close()
+        Try
+            Dim savefolder As String = "\Reports"
+            Dim savedirectory As String = My.Application.Info.DirectoryPath & savefolder
+            Directory.CreateDirectory(savedirectory)
+            Dim doc = New iText.Document()
+            Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream(savepath, FileMode.Create))
+            doc.Open()
+            Dim cb As PdfContentByte = writer.DirectContent
+            Dim basefont As BaseFont = BaseFont.CreateFont("C:\Windows\Fonts\meiryo.ttc,0", BaseFont.IDENTITY_H, True)
+            cb.BeginText()
+            cb.SetFontAndSize(basefont, 14)
+            'レポートの内容
+            cb.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "ITToolKit Setup Report (" & Date.Today & ")", 150, 800, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "------------------------------------------------------------------------------------------", 20, 785, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "*管理情報", 20, 765, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "申請を受け付けたIT管理委員: " & itname, 20, 745, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "PC所有者: " & username, 20, 725, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "学籍番号: " & number, 20, 705, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "使用しているウイルス対策ソフト: " & antivirus, 20, 685, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "ライセンスキー: " & license, 20, 665, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "------------------------------------------------------------------------------------------", 20, 645, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "*システム情報", 20, 625, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(0, 0) & ":                       " & items(0, 1), 20, 605, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(1, 0) & ":                             " & items(1, 1), 20, 585, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(2, 0) & ":           " & items(2, 1), 20, 565, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(3, 0) & ":                " & items(3, 1), 20, 545, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(4, 0) & ":                " & items(4, 1), 20, 525, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(5, 0) & ":  " & items(5, 1), 20, 505, 0)
+            cb.EndText()
+            doc.Close()
+        Catch ex As Exception
+            MessageBox.Show("ファイルの保存に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
@@ -322,25 +337,29 @@ Public Class MainForm
         End If
     End Sub
     Sub LoadSettings()
-        If File.Exists(".\Settings.dat") Then
-            Dim cReader As New StreamReader(".\Settings.dat", Encoding.Default)
-
-            ' 読み込んだ結果をすべて格納するための変数を宣言する
-            Dim l As Integer = 0
-            ' 読み込みできる文字がなくなるまで繰り返す
-            While cReader.Peek() >= 0
-                ' ファイルを 1 行ずつ読み込む
-                Dim stBuffer As String = cReader.ReadLine()
-                ComboBox2.Items.Add(stBuffer)
-                l = l + 1
-            End While
-            cReader.Close()
-            ComboBox2.SelectedItem = "(選択してください)"
-        Else
-            'Dim fs As FileStream = File.Create(".\Settings.dat")
-            Dim sw As New StreamWriter(".\Settings.dat", False, Encoding.GetEncoding("shift_jis"))
-            sw.WriteLine("(選択してください)")
-            sw.Close()
+        Try
+            If File.Exists(".\Settings.dat") Then
+                Dim cReader As New StreamReader(".\Settings.dat", Encoding.Default)
+                Dim l As Integer = 0
+                While cReader.Peek() >= 0
+                    Dim stBuffer As String = cReader.ReadLine()
+                    ComboBox2.Items.Add(stBuffer)
+                    l = l + 1
+                End While
+                cReader.Close()
+                ComboBox2.SelectedItem = "(選択してください)"
+            Else
+                Dim sw As New StreamWriter(".\Settings.dat", False, Encoding.GetEncoding("shift_jis"))
+                sw.WriteLine("(選択してください)")
+                sw.Close()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("設定ファイルのロードにに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    Private Sub LinkLabel2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles LinkLabel2.KeyPress
+        If (Control.ModifierKeys And Keys.ControlKey) = Keys.ControlKey Then
+            LinkLabel2.Enabled = True
         End If
     End Sub
 End Class

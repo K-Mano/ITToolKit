@@ -107,7 +107,7 @@ Partial Class MainForm
         Me.WizardControl1.Size = New System.Drawing.Size(631, 450)
         Me.WizardControl1.TabIndex = 0
         Me.WizardControl1.Text = "IT管理委員ToolKit"
-        Me.WizardControl1.Title = "IT管理委員ToolKit (PreRelease v1.2)"
+        Me.WizardControl1.Title = "IT管理委員支援ToolKit v1.0"
         Me.WizardControl1.TitleIcon = CType(resources.GetObject("WizardControl1.TitleIcon"), System.Drawing.Icon)
         '
         'MainPage
@@ -125,6 +125,7 @@ Partial Class MainForm
         'LinkLabel2
         '
         Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Enabled = False
         Me.LinkLabel2.Location = New System.Drawing.Point(84, 281)
         Me.LinkLabel2.Name = "LinkLabel2"
         Me.LinkLabel2.Size = New System.Drawing.Size(68, 15)
@@ -190,6 +191,7 @@ Partial Class MainForm
         '
         'ComboBox2
         '
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Location = New System.Drawing.Point(252, 16)
@@ -203,9 +205,9 @@ Partial Class MainForm
         Me.Label5.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label5.Location = New System.Drawing.Point(18, 19)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(83, 15)
+        Me.Label5.Size = New System.Drawing.Size(88, 15)
         Me.Label5.TabIndex = 1
-        Me.Label5.Text = "記入者の名前 :"
+        Me.Label5.Text = "*記入者の名前 :"
         '
         'GroupBox4
         '
@@ -235,9 +237,9 @@ Partial Class MainForm
         Me.Label7.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label7.Location = New System.Drawing.Point(18, 48)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(61, 15)
+        Me.Label7.Size = New System.Drawing.Size(66, 15)
         Me.Label7.TabIndex = 5
-        Me.Label7.Text = "学籍番号 :"
+        Me.Label7.Text = "*学籍番号 :"
         '
         'TextBox2
         '
@@ -252,9 +254,9 @@ Partial Class MainForm
         Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label3.Location = New System.Drawing.Point(18, 19)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(37, 15)
+        Me.Label3.Size = New System.Drawing.Size(42, 15)
         Me.Label3.TabIndex = 1
-        Me.Label3.Text = "名前 :"
+        Me.Label3.Text = "*名前 :"
         '
         'GroupBox3
         '
@@ -283,9 +285,9 @@ Partial Class MainForm
         Me.Label2.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label2.Location = New System.Drawing.Point(18, 48)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(75, 15)
+        Me.Label2.Size = New System.Drawing.Size(80, 15)
         Me.Label2.TabIndex = 2
-        Me.Label2.Text = "ライセンスキー :"
+        Me.Label2.Text = "*ライセンスキー :"
         '
         'ComboBox1
         '
@@ -304,9 +306,9 @@ Partial Class MainForm
         Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label1.Location = New System.Drawing.Point(18, 19)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(124, 15)
+        Me.Label1.Size = New System.Drawing.Size(129, 15)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "ウイルス対策ソフトウェア :"
+        Me.Label1.Text = "*ウイルス対策ソフトウェア :"
         '
         'DataPage
         '
@@ -513,7 +515,7 @@ Partial Class MainForm
         Me.CommandLink5.Note = "許可願に直接データを印刷できる文書ファイルを出力します。"
         Me.CommandLink5.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink5.TabIndex = 17
-        Me.CommandLink5.Text = "PC持ち込み許可願に印刷(&P)(未実装,検討中)"
+        Me.CommandLink5.Text = "PC持ち込み許可願に印刷(&P)(*検討中)"
         Me.CommandLink5.UseVisualStyleBackColor = True
         '
         'CommandLink4
@@ -523,7 +525,7 @@ Partial Class MainForm
         Me.CommandLink4.Note = "セットアップ レポートをpdf形式(*.pdf)で出力します。"
         Me.CommandLink4.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink4.TabIndex = 16
-        Me.CommandLink4.Text = "セットアップ レポートの出力(&N)(仮実装)"
+        Me.CommandLink4.Text = "セットアップ レポートの出力(&N)"
         Me.CommandLink4.UseVisualStyleBackColor = True
         '
         'MainForm
@@ -538,7 +540,7 @@ Partial Class MainForm
         Me.MinimizeBox = False
         Me.Name = "MainForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "IT管理委員ToolKit"
+        Me.Text = "IT管理委員支援ToolKit"
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MainPage.ResumeLayout(False)
         Me.MainPage.PerformLayout()
