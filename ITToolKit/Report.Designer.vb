@@ -35,11 +35,10 @@ Partial Class Report
         Me.ヘルプHToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.バージョン情報VToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusBar1 = New System.Windows.Forms.StatusBar()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.AxAcroPDF1 = New AxAcroPDFLib.AxAcroPDF()
         Me.MenuStrip1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
+        CType(Me.AxAcroPDF1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -49,7 +48,7 @@ Partial Class Report
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(778, 26)
+        Me.MenuStrip1.Size = New System.Drawing.Size(634, 26)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -82,7 +81,7 @@ Partial Class Report
         '更新RToolStripMenuItem
         '
         Me.更新RToolStripMenuItem.Name = "更新RToolStripMenuItem"
-        Me.更新RToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.更新RToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.更新RToolStripMenuItem.Text = "更新(&R)"
         '
         '表示VToolStripMenuItem
@@ -94,12 +93,14 @@ Partial Class Report
         '
         'プレビュー用表示PToolStripMenuItem
         '
+        Me.プレビュー用表示PToolStripMenuItem.Enabled = False
         Me.プレビュー用表示PToolStripMenuItem.Name = "プレビュー用表示PToolStripMenuItem"
         Me.プレビュー用表示PToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.プレビュー用表示PToolStripMenuItem.Text = "プレビュー用表示(&P)"
         '
         '保存用表示SToolStripMenuItem
         '
+        Me.保存用表示SToolStripMenuItem.Enabled = False
         Me.保存用表示SToolStripMenuItem.Name = "保存用表示SToolStripMenuItem"
         Me.保存用表示SToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.保存用表示SToolStripMenuItem.Text = "保存用表示(&S)"
@@ -114,48 +115,37 @@ Partial Class Report
         'バージョン情報VToolStripMenuItem
         '
         Me.バージョン情報VToolStripMenuItem.Name = "バージョン情報VToolStripMenuItem"
-        Me.バージョン情報VToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.バージョン情報VToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.バージョン情報VToolStripMenuItem.Text = "バージョン情報(&V)"
         '
         'StatusBar1
         '
-        Me.StatusBar1.Location = New System.Drawing.Point(0, 561)
+        Me.StatusBar1.Location = New System.Drawing.Point(0, 734)
         Me.StatusBar1.Name = "StatusBar1"
-        Me.StatusBar1.Size = New System.Drawing.Size(778, 27)
+        Me.StatusBar1.Size = New System.Drawing.Size(634, 27)
         Me.StatusBar1.TabIndex = 3
         Me.StatusBar1.Text = "Ready"
-        '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.White
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(0, 26)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(778, 535)
-        Me.Panel1.TabIndex = 5
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label1.Font = New System.Drawing.Font("Yu Gothic UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 10)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(163, 25)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "パソコン持込許可願"
         '
         'SaveFileDialog1
         '
         Me.SaveFileDialog1.Filter = "pdfファイル (*.pdf)|*.pdf|すべてのファイル(*.*)|*.*"
         '
+        'AxAcroPDF1
+        '
+        Me.AxAcroPDF1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AxAcroPDF1.Enabled = True
+        Me.AxAcroPDF1.Location = New System.Drawing.Point(0, 26)
+        Me.AxAcroPDF1.Name = "AxAcroPDF1"
+        Me.AxAcroPDF1.OcxState = CType(resources.GetObject("AxAcroPDF1.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.AxAcroPDF1.Size = New System.Drawing.Size(634, 708)
+        Me.AxAcroPDF1.TabIndex = 4
+        '
         'Report
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(778, 588)
-        Me.Controls.Add(Me.Panel1)
+        Me.ClientSize = New System.Drawing.Size(634, 761)
+        Me.Controls.Add(Me.AxAcroPDF1)
         Me.Controls.Add(Me.StatusBar1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -165,8 +155,7 @@ Partial Class Report
         Me.Text = "セットアップ レポートのプレビュー"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        CType(Me.AxAcroPDF1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -179,12 +168,11 @@ Partial Class Report
     Friend WithEvents 操作AToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents 表示VToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ヘルプHToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents 名前を付けて保存AToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents 更新RToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents プレビュー用表示PToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents 保存用表示SToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents バージョン情報VToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Label1 As Label
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
+    Friend WithEvents AxAcroPDF1 As AxAcroPDFLib.AxAcroPDF
 End Class

@@ -28,6 +28,7 @@ Partial Class MainForm
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.WizardControl1 = New AeroWizard.WizardControl()
         Me.MainPage = New AeroWizard.WizardPage()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.CommandLink1 = New System.Windows.Forms.CommandLink()
         Me.InfoPage = New AeroWizard.WizardPage()
@@ -84,7 +85,8 @@ Partial Class MainForm
         '
         'SaveFileDialog1
         '
-        Me.SaveFileDialog1.Filter = "CSVファイル (*.csv)|*.csv|テキストファイル (*.txt)|*.txt|すべてのファイル(*.*)|*.*"
+        Me.SaveFileDialog1.Filter = "Excel ブック(*.xlsx)|*.xlsx|CSVファイル (*.csv)|*.csv|テキストファイル (*.txt)|*.txt|すべてのファイル(*." &
+    "*)|*.*"
         Me.SaveFileDialog1.Title = "名前を付けてデータリストを保存"
         '
         'WizardControl1
@@ -111,6 +113,7 @@ Partial Class MainForm
         'MainPage
         '
         Me.MainPage.AllowNext = False
+        Me.MainPage.Controls.Add(Me.LinkLabel2)
         Me.MainPage.Controls.Add(Me.LinkLabel1)
         Me.MainPage.Controls.Add(Me.CommandLink1)
         Me.MainPage.Name = "MainPage"
@@ -118,6 +121,16 @@ Partial Class MainForm
         Me.MainPage.Size = New System.Drawing.Size(584, 296)
         Me.MainPage.TabIndex = 0
         Me.MainPage.Text = "IT管理委員ToolKitへようこそ"
+        '
+        'LinkLabel2
+        '
+        Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Location = New System.Drawing.Point(84, 281)
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.Size = New System.Drawing.Size(68, 15)
+        Me.LinkLabel2.TabIndex = 1
+        Me.LinkLabel2.TabStop = True
+        Me.LinkLabel2.Text = "デバッグモード"
         '
         'LinkLabel1
         '
@@ -160,7 +173,7 @@ Partial Class MainForm
         Me.CommandLink8.Note = "入力された情報をレポートに記録して続けます。"
         Me.CommandLink8.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink8.TabIndex = 1
-        Me.CommandLink8.Text = "確定して次のステップへ進む"
+        Me.CommandLink8.Text = "確定して次のステップへ進む(&N)"
         Me.CommandLink8.UseVisualStyleBackColor = True
         '
         'GroupBox5
@@ -179,7 +192,6 @@ Partial Class MainForm
         '
         Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"(*未実装)", "真野 京介, 2I", "高橋 直樹, 2I", "宮本 圭一郎, 2I"})
         Me.ComboBox2.Location = New System.Drawing.Point(252, 16)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(222, 23)
@@ -455,7 +467,7 @@ Partial Class MainForm
         Me.CommandLink6.Note = "すべての設定を反映します。"
         Me.CommandLink6.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink6.TabIndex = 14
-        Me.CommandLink6.Text = "すべてに適用"
+        Me.CommandLink6.Text = "すべてに適用(&A)"
         Me.CommandLink6.UseVisualStyleBackColor = True
         '
         'FinishPage
@@ -490,7 +502,7 @@ Partial Class MainForm
         Me.CommandLink7.Note = "IT管理委員ToolKitを終了します。"
         Me.CommandLink7.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink7.TabIndex = 18
-        Me.CommandLink7.Text = "終了"
+        Me.CommandLink7.Text = "終了(&E)"
         Me.CommandLink7.UseVisualStyleBackColor = True
         '
         'CommandLink5
@@ -501,7 +513,7 @@ Partial Class MainForm
         Me.CommandLink5.Note = "許可願に直接データを印刷できる文書ファイルを出力します。"
         Me.CommandLink5.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink5.TabIndex = 17
-        Me.CommandLink5.Text = "PC持ち込み許可願に印刷(未実装,検討中)"
+        Me.CommandLink5.Text = "PC持ち込み許可願に印刷(&P)(未実装,検討中)"
         Me.CommandLink5.UseVisualStyleBackColor = True
         '
         'CommandLink4
@@ -511,7 +523,7 @@ Partial Class MainForm
         Me.CommandLink4.Note = "セットアップ レポートをpdf形式(*.pdf)で出力します。"
         Me.CommandLink4.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink4.TabIndex = 16
-        Me.CommandLink4.Text = "セットアップ レポートの出力(未実装)"
+        Me.CommandLink4.Text = "セットアップ レポートの出力(&N)(仮実装)"
         Me.CommandLink4.UseVisualStyleBackColor = True
         '
         'MainForm
@@ -589,4 +601,5 @@ Partial Class MainForm
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents CommandLink8 As CommandLink
+    Friend WithEvents LinkLabel2 As LinkLabel
 End Class
