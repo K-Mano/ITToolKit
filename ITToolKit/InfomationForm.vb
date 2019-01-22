@@ -9,7 +9,7 @@
         End If
         Text = String.Format("{0} のバージョン情報", ApplicationTitle)
         LabelProductName.Text = My.Application.Info.ProductName
-        LabelVersion.Text = String.Format("バージョン PreRelease{0}b", My.Application.Info.Version.ToString)
+        LabelVersion.Text = String.Format("バージョン PreRelease{0}", My.Application.Info.Version.ToString)
         LabelCopyright.Text = My.Application.Info.Copyright
         LabelCompanyName.Text = My.Application.Info.CompanyName
         'TextBoxDescription.Text = My.Application.Info.Description

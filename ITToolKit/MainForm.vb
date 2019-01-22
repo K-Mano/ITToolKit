@@ -6,7 +6,6 @@ Imports System.Management
 Imports iTextSharp.text.pdf
 Imports iText = iTextSharp.text
 Imports ClosedXML.Excel
-
 Public Class MainForm
     Dim items(,) As String = {
         {"メーカー", ""},
@@ -141,7 +140,44 @@ Public Class MainForm
         End Try
     End Sub
     Private Sub SaveDataListForXLSX()
+        Try
+            phythicsnumber = phythicsnumber.Insert(2, ",")
+            phythicsnumber = phythicsnumber.Insert(5, ",")
+            phythicsnumber = phythicsnumber.Insert(8, ",")
+            phythicsnumber = phythicsnumber.Insert(11, ",")
+            phythicsnumber = phythicsnumber.Insert(14, ",")
+            Dim delim As Char = ","
+            Dim destArr As String() = Split(phythicsnumber, delim, -1)
+            Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
+            Dim objWBook As New XLWorkbook
+            Dim objSheet As IXLWorksheet = objWBook.Worksheets.Add("Sheet1")
+            '.xlsxブックの内容
+            objSheet.Range("B1:G1").Merge()
+            objSheet.Range("B2:G2").Merge()
+            objSheet.Range("B3:G3").Merge()
+            objSheet.Range("B4:G4").Merge()
+            objSheet.Range("B6:G6").Merge()
+            objSheet.Range("A1").Value = items(0, 0)
+            objSheet.Range("A2").Value = items(1, 0)
+            objSheet.Range("A3").Value = items(2, 0)
+            objSheet.Range("A4").Value = items(3, 0)
+            objSheet.Range("A5").Value = items(4, 0)
+            objSheet.Range("A6").Value = items(5, 0)
+            objSheet.Range("B1").Value = items(0, 1)
+            objSheet.Range("B2").Value = items(1, 1)
+            objSheet.Range("B3").Value = items(2, 1)
+            objSheet.Range("B4").Value = items(3, 1)
+            objSheet.Range("B5").Value = destArr(0)
+            objSheet.Range("B6").Value = items(5, 1)
+            objSheet.Range("C5").Value = destArr(1)
+            objSheet.Range("D5").Value = destArr(2)
+            objSheet.Range("E5").Value = destArr(3)
+            objSheet.Range("F5").Value = destArr(4)
+            objSheet.Range("G5").Value = destArr(5)
+            objWBook.SaveAs(path)
+        Catch ex As Exception
 
+        End Try
     End Sub
 
     Private Sub SaveFileDialog1_FileOk(sender As Object, e As CancelEventArgs) Handles SaveFileDialog1.FileOk
@@ -149,6 +185,8 @@ Public Class MainForm
             SaveDataListForCSV()
         ElseIf Path.GetExtension(SaveFileDialog1.FileName).Contains("txt") Then
             SaveDataListForText()
+        ElseIf Path.GetExtension(SaveFileDialog1.FileName).Contains("xlsx") Then
+            SaveDataListForXLSX()
         End If
     End Sub
 

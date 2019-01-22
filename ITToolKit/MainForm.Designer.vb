@@ -107,7 +107,7 @@ Partial Class MainForm
         Me.WizardControl1.Size = New System.Drawing.Size(631, 450)
         Me.WizardControl1.TabIndex = 0
         Me.WizardControl1.Text = "IT管理委員ToolKit"
-        Me.WizardControl1.Title = "IT管理委員ToolKit (PreRelease v1.2b4)"
+        Me.WizardControl1.Title = "IT管理委員ToolKit (PreRelease v1.2)"
         Me.WizardControl1.TitleIcon = CType(resources.GetObject("WizardControl1.TitleIcon"), System.Drawing.Icon)
         '
         'MainPage
