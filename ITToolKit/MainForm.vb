@@ -263,8 +263,12 @@ Public Class MainForm
         filename = "\Reports\report_" & number & ".pdf"
         Dim filepath As String = My.Application.Info.DirectoryPath & filename
         CreatePdf(filepath)
-        Report.AxAcroPDF1.LoadFile(filepath)
-        Report.Show()
+        If File.Exists("C:\Program Files (x86)\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll") Then
+            Report.AxAcroPDF1.LoadFile(filepath)
+            Report.Show()
+        Else
+            MessageBox.Show("Adobe Acrobatがインストールされていないため、レポートを表示できませんでした。(レポートは自動で保存されています。)", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
     End Sub
 
     Private Sub CommandLink8_Click(sender As Object, e As EventArgs) Handles CommandLink8.Click
@@ -306,35 +310,31 @@ Public Class MainForm
             cb.SetFontAndSize(basefont, 14)
             'レポートの内容
             cb.ShowTextAligned(PdfContentByte.ALIGN_CENTER, "ITToolKit Setup Report (" & Date.Today & ")", 150, 800, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "------------------------------------------------------------------------------------------", 20, 785, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "――――――――――――――――――――――――――――――――――――――――", 20, 785, 0)
             cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "*管理情報", 20, 765, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "申請を受け付けたIT管理委員: " & itname, 20, 745, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "PC所有者: " & username, 20, 725, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "学籍番号: " & number, 20, 705, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "使用しているウイルス対策ソフト: " & antivirus, 20, 685, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "ライセンスキー: " & license, 20, 665, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "------------------------------------------------------------------------------------------", 20, 645, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "申請を受け付けたIT管理委員:", 20, 745, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, itname, 300, 745, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "PC所有者:", 20, 725, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, username, 300, 725, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "学籍番号:", 20, 705, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, number, 300, 705, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "使用しているウイルス対策ソフト:", 20, 685, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, antivirus, 300, 685, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "ライセンスキー: ", 20, 665, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, license, 300, 665, 0)
+            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "――――――――――――――――――――――――――――――――――――――――", 20, 645, 0)
             cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "*システム情報", 20, 625, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(0, 0) & ":                       " & items(0, 1), 20, 605, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(1, 0) & ":                             " & items(1, 1), 20, 585, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(2, 0) & ":           " & items(2, 1), 20, 565, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(3, 0) & ":                " & items(3, 1), 20, 545, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(4, 0) & ":                " & items(4, 1), 20, 525, 0)
-            cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(5, 0) & ":  " & items(5, 1), 20, 505, 0)
+            Dim y As Integer = 605
+            For I As Integer = 0 To 5
+                cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(I, 0) & ":", 20, y, 0)
+                cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, items(I, 1), 300, y, 0)
+                y = y - 20
+            Next
             cb.EndText()
             doc.Close()
         Catch ex As Exception
             MessageBox.Show("ファイルの保存に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-    End Sub
-
-    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
-        Dim result As DialogResult = MessageBox.Show("これは開発者向けのデバッグ用モードです。続けますか?", "警告:これは開発者向け機能です", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
-        If result = DialogResult.OK Then
-            DebugControl.Show()
-        ElseIf result = DialogResult.Cancel Then
-            Close()
-        End If
     End Sub
     Sub LoadSettings()
         Try
@@ -357,9 +357,11 @@ Public Class MainForm
             MessageBox.Show("設定ファイルのロードにに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    Private Sub LinkLabel2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles LinkLabel2.KeyPress
-        If (Control.ModifierKeys And Keys.ControlKey) = Keys.ControlKey Then
-            LinkLabel2.Enabled = True
-        End If
-    End Sub
+
+    'Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
+    '   If TextBox3.TextLength < 5 Then
+    '       TextBox3.Text = String.Format("{0:#-0}", TextBox3.Text)
+    '       TextBox3.Text = Len(TextBox3.Text) + 1
+    '   End If
+    'End Sub
 End Class

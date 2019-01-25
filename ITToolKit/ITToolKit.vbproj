@@ -139,12 +139,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DebugControl.Designer.vb">
-      <DependentUpon>DebugControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="DebugControl.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="InfomationForm.Designer.vb">
       <DependentUpon>InfomationForm.vb</DependentUpon>
     </Compile>
@@ -181,9 +175,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DebugControl.resx">
-      <DependentUpon>DebugControl.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="InfomationForm.resx">
       <DependentUpon>InfomationForm.vb</DependentUpon>
     </EmbeddedResource>

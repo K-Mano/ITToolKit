@@ -28,7 +28,6 @@ Partial Class MainForm
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.WizardControl1 = New AeroWizard.WizardControl()
         Me.MainPage = New AeroWizard.WizardPage()
-        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.CommandLink1 = New System.Windows.Forms.CommandLink()
         Me.InfoPage = New AeroWizard.WizardPage()
@@ -37,6 +36,8 @@ Partial Class MainForm
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -104,7 +105,7 @@ Partial Class MainForm
         Me.WizardControl1.Pages.Add(Me.DataPage)
         Me.WizardControl1.Pages.Add(Me.ProxyPage)
         Me.WizardControl1.Pages.Add(Me.FinishPage)
-        Me.WizardControl1.Size = New System.Drawing.Size(631, 450)
+        Me.WizardControl1.Size = New System.Drawing.Size(634, 486)
         Me.WizardControl1.TabIndex = 0
         Me.WizardControl1.Text = "IT管理委員ToolKit"
         Me.WizardControl1.Title = "IT管理委員支援ToolKit v1.0"
@@ -113,30 +114,18 @@ Partial Class MainForm
         'MainPage
         '
         Me.MainPage.AllowNext = False
-        Me.MainPage.Controls.Add(Me.LinkLabel2)
         Me.MainPage.Controls.Add(Me.LinkLabel1)
         Me.MainPage.Controls.Add(Me.CommandLink1)
         Me.MainPage.Name = "MainPage"
         Me.MainPage.NextPage = Me.InfoPage
-        Me.MainPage.Size = New System.Drawing.Size(584, 296)
+        Me.MainPage.Size = New System.Drawing.Size(587, 332)
         Me.MainPage.TabIndex = 0
         Me.MainPage.Text = "IT管理委員ToolKitへようこそ"
-        '
-        'LinkLabel2
-        '
-        Me.LinkLabel2.AutoSize = True
-        Me.LinkLabel2.Enabled = False
-        Me.LinkLabel2.Location = New System.Drawing.Point(84, 281)
-        Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.Size = New System.Drawing.Size(68, 15)
-        Me.LinkLabel2.TabIndex = 1
-        Me.LinkLabel2.TabStop = True
-        Me.LinkLabel2.Text = "デバッグモード"
         '
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(3, 281)
+        Me.LinkLabel1.Location = New System.Drawing.Point(5, 310)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(75, 15)
         Me.LinkLabel1.TabIndex = 12
@@ -163,13 +152,13 @@ Partial Class MainForm
         Me.InfoPage.Name = "InfoPage"
         Me.InfoPage.NextPage = Me.DataPage
         Me.InfoPage.ShowNext = False
-        Me.InfoPage.Size = New System.Drawing.Size(584, 296)
+        Me.InfoPage.Size = New System.Drawing.Size(587, 332)
         Me.InfoPage.TabIndex = 4
         Me.InfoPage.Text = "レポートに必要な情報を入力"
         '
         'CommandLink8
         '
-        Me.CommandLink8.Location = New System.Drawing.Point(3, 218)
+        Me.CommandLink8.Location = New System.Drawing.Point(3, 254)
         Me.CommandLink8.Name = "CommandLink8"
         Me.CommandLink8.Note = "入力された情報をレポートに記録して続けます。"
         Me.CommandLink8.Size = New System.Drawing.Size(550, 75)
@@ -182,7 +171,7 @@ Partial Class MainForm
         Me.GroupBox5.Controls.Add(Me.ComboBox2)
         Me.GroupBox5.Controls.Add(Me.Label5)
         Me.GroupBox5.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.GroupBox5.Location = New System.Drawing.Point(3, 166)
+        Me.GroupBox5.Location = New System.Drawing.Point(3, 200)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(550, 48)
         Me.GroupBox5.TabIndex = 3
@@ -211,6 +200,8 @@ Partial Class MainForm
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.TextBox3)
+        Me.GroupBox4.Controls.Add(Me.Label6)
         Me.GroupBox4.Controls.Add(Me.TextBox4)
         Me.GroupBox4.Controls.Add(Me.Label7)
         Me.GroupBox4.Controls.Add(Me.TextBox2)
@@ -218,10 +209,29 @@ Partial Class MainForm
         Me.GroupBox4.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.GroupBox4.Location = New System.Drawing.Point(3, 83)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(550, 77)
+        Me.GroupBox4.Size = New System.Drawing.Size(550, 111)
         Me.GroupBox4.TabIndex = 2
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "使用者情報"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Enabled = False
+        Me.TextBox3.Location = New System.Drawing.Point(252, 74)
+        Me.TextBox3.MaxLength = 6
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(222, 23)
+        Me.TextBox3.TabIndex = 8
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.Label6.Location = New System.Drawing.Point(18, 77)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(105, 15)
+        Me.Label6.TabIndex = 7
+        Me.Label6.Text = "部屋番号(未実装) :"
         '
         'TextBox4
         '
@@ -533,7 +543,7 @@ Partial Class MainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(631, 450)
+        Me.ClientSize = New System.Drawing.Size(634, 486)
         Me.Controls.Add(Me.WizardControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -603,5 +613,6 @@ Partial Class MainForm
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents CommandLink8 As CommandLink
-    Friend WithEvents LinkLabel2 As LinkLabel
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents Label6 As Label
 End Class

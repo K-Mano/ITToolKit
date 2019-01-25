@@ -81,7 +81,7 @@ Partial Class Report
         '更新RToolStripMenuItem
         '
         Me.更新RToolStripMenuItem.Name = "更新RToolStripMenuItem"
-        Me.更新RToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.更新RToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
         Me.更新RToolStripMenuItem.Text = "更新(&R)"
         '
         '表示VToolStripMenuItem
@@ -115,7 +115,7 @@ Partial Class Report
         'バージョン情報VToolStripMenuItem
         '
         Me.バージョン情報VToolStripMenuItem.Name = "バージョン情報VToolStripMenuItem"
-        Me.バージョン情報VToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.バージョン情報VToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
         Me.バージョン情報VToolStripMenuItem.Text = "バージョン情報(&V)"
         '
         'StatusBar1
