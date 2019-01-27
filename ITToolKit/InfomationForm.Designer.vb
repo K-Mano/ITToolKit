@@ -84,7 +84,7 @@ Partial Class InfomationForm
         'LabelProductName
         '
         Me.LabelProductName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelProductName.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LabelProductName.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LabelProductName.Location = New System.Drawing.Point(206, 0)
         Me.LabelProductName.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelProductName.MaximumSize = New System.Drawing.Size(0, 16)
@@ -97,7 +97,7 @@ Partial Class InfomationForm
         'LabelVersion
         '
         Me.LabelVersion.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelVersion.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LabelVersion.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LabelVersion.Location = New System.Drawing.Point(206, 28)
         Me.LabelVersion.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelVersion.MaximumSize = New System.Drawing.Size(0, 16)
@@ -110,7 +110,7 @@ Partial Class InfomationForm
         'LabelCopyright
         '
         Me.LabelCopyright.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelCopyright.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LabelCopyright.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LabelCopyright.Location = New System.Drawing.Point(206, 56)
         Me.LabelCopyright.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelCopyright.MaximumSize = New System.Drawing.Size(0, 16)
@@ -123,7 +123,7 @@ Partial Class InfomationForm
         'LabelCompanyName
         '
         Me.LabelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelCompanyName.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.LabelCompanyName.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LabelCompanyName.Location = New System.Drawing.Point(206, 84)
         Me.LabelCompanyName.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelCompanyName.MaximumSize = New System.Drawing.Size(0, 16)
@@ -136,7 +136,7 @@ Partial Class InfomationForm
         'TextBoxDescription
         '
         Me.TextBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBoxDescription.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TextBoxDescription.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.TextBoxDescription.Location = New System.Drawing.Point(206, 115)
         Me.TextBoxDescription.Margin = New System.Windows.Forms.Padding(6, 3, 3, 3)
         Me.TextBoxDescription.Multiline = True

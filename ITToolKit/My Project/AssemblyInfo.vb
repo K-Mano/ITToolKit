@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' アセンブリ属性の値を確認します
 
 <Assembly: AssemblyTitle("ITToolKit")>
-<Assembly: AssemblyDescription("IT管理委員支援ソフトウェアです。")>
+<Assembly: AssemblyDescription("IT管理委員支援ソフトウェア")>
 <Assembly: AssemblyCompany("ACT Information Development@nsip.org")>
 <Assembly: AssemblyProduct("ITToolKit")>
 <Assembly: AssemblyCopyright("Copyright © 2017-2019 nsip.org All Rights Reserved.")>

@@ -67,7 +67,7 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>114.ico</ApplicationIcon>
+    <ApplicationIcon>testicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AeroWizard, Version=2.2.2.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
@@ -239,6 +239,14 @@
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+    <COMReference Include="AxMicrosoft.Vbe.Interop.Forms">
+      <Guid>{0D452EE1-E08F-101A-852E-02608C4D0BB4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="Microsoft.Vbe.Interop.Forms">
       <Guid>{0D452EE1-E08F-101A-852E-02608C4D0BB4}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -295,7 +303,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="114.ico" />
+    <Content Include="testicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

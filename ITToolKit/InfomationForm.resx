@@ -121,14 +121,16 @@
     <value>Developed by K. Mano@nsip.org
 ----------------------------------------------
 Special Thanks for
-Naoki Takahashi (Debugging/Cording for Windows Version)
+Naoki Takahashi (Debugging/Cording)
 Keiichiro Miyamoto(Debugging/Planning)
 ----------------------------------------------
 Thanks for
+All Beta Testers;
 All Package Creators;
 AeroWizard
 ClosedXML
 iTextSharp
-WindowsFormsAero</value>
+DotNetBar
+</value>
   </data>
 </root>

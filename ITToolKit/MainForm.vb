@@ -149,7 +149,7 @@ Public Class MainForm
             Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
             Dim objWBook As New XLWorkbook
             Dim objSheet As IXLWorksheet = objWBook.Worksheets.Add("Sheet1")
-            '.xlsxブックの内容
+            '----------------------.xlsxブックの内容--------------------------
             objSheet.Range("B1:G1").Merge()
             objSheet.Range("B2:G2").Merge()
             objSheet.Range("B3:G3").Merge()
@@ -263,12 +263,12 @@ Public Class MainForm
         filename = "\Reports\report_" & number & ".pdf"
         Dim filepath As String = My.Application.Info.DirectoryPath & filename
         CreatePdf(filepath)
-        If File.Exists("C:\Program Files (x86)\Common Files\Adobe\Acrobat\ActiveX\AcroPDF.dll") Then
+        Try
             Report.AxAcroPDF1.LoadFile(filepath)
             Report.Show()
-        Else
+        Catch ex As Exception
             MessageBox.Show("Adobe Acrobatがインストールされていないため、レポートを表示できませんでした。(レポートは自動で保存されています。)", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
+        End Try
     End Sub
 
     Private Sub CommandLink8_Click(sender As Object, e As EventArgs) Handles CommandLink8.Click
@@ -358,10 +358,12 @@ Public Class MainForm
         End Try
     End Sub
 
-    'Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
-    '   If TextBox3.TextLength < 5 Then
-    '       TextBox3.Text = String.Format("{0:#-0}", TextBox3.Text)
-    '       TextBox3.Text = Len(TextBox3.Text) + 1
-    '   End If
-    'End Sub
+    Private Sub CommandLink9_Click(sender As Object, e As EventArgs) Handles CommandLink9.Click
+        Dim p As Process = Process.Start(".\Settings.dat")
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ComboBox2.Items.Clear()
+        LoadSettings()
+    End Sub
 End Class
