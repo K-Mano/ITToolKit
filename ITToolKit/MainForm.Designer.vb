@@ -22,17 +22,18 @@ Partial Class MainForm
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.WizardControl1 = New AeroWizard.WizardControl()
         Me.MainPage = New AeroWizard.WizardPage()
+        Me.CommandLink10 = New System.Windows.Forms.CommandLink()
+        Me.CommandLink9 = New System.Windows.Forms.CommandLink()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.CommandLink1 = New System.Windows.Forms.CommandLink()
         Me.InfoPage = New AeroWizard.WizardPage()
         Me.CommandLink8 = New System.Windows.Forms.CommandLink()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -64,8 +65,6 @@ Partial Class MainForm
         Me.CommandLink7 = New System.Windows.Forms.CommandLink()
         Me.CommandLink5 = New System.Windows.Forms.CommandLink()
         Me.CommandLink4 = New System.Windows.Forms.CommandLink()
-        Me.CommandLink9 = New System.Windows.Forms.CommandLink()
-        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPage.SuspendLayout()
         Me.InfoPage.SuspendLayout()
@@ -78,11 +77,6 @@ Partial Class MainForm
         Me.GroupBox2.SuspendLayout()
         Me.FinishPage.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'StyleManager1
-        '
-        Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
-        Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(115, Byte), Integer), CType(CType(199, Byte), Integer)))
         '
         'SaveFileDialog1
         '
@@ -108,12 +102,13 @@ Partial Class MainForm
         Me.WizardControl1.Size = New System.Drawing.Size(634, 461)
         Me.WizardControl1.TabIndex = 0
         Me.WizardControl1.Text = "IT管理委員ToolKit"
-        Me.WizardControl1.Title = "IT管理委員支援ToolKit Preview2"
+        Me.WizardControl1.Title = "IT管理委員支援ToolKit"
         Me.WizardControl1.TitleIcon = CType(resources.GetObject("WizardControl1.TitleIcon"), System.Drawing.Icon)
         '
         'MainPage
         '
         Me.MainPage.AllowNext = False
+        Me.MainPage.Controls.Add(Me.CommandLink10)
         Me.MainPage.Controls.Add(Me.CommandLink9)
         Me.MainPage.Controls.Add(Me.LinkLabel1)
         Me.MainPage.Controls.Add(Me.CommandLink1)
@@ -122,6 +117,27 @@ Partial Class MainForm
         Me.MainPage.Size = New System.Drawing.Size(587, 307)
         Me.MainPage.TabIndex = 0
         Me.MainPage.Text = "IT管理委員ToolKitへようこそ"
+        '
+        'CommandLink10
+        '
+        Me.CommandLink10.Location = New System.Drawing.Point(3, 165)
+        Me.CommandLink10.Name = "CommandLink10"
+        Me.CommandLink10.Note = "アップデート サーバーに接続して最新バージョンを確認します。"
+        Me.CommandLink10.ShowShield = True
+        Me.CommandLink10.Size = New System.Drawing.Size(550, 75)
+        Me.CommandLink10.TabIndex = 13
+        Me.CommandLink10.Text = "アップデートの確認(&U)"
+        Me.CommandLink10.UseVisualStyleBackColor = True
+        '
+        'CommandLink9
+        '
+        Me.CommandLink9.Location = New System.Drawing.Point(3, 84)
+        Me.CommandLink9.Name = "CommandLink9"
+        Me.CommandLink9.Note = "保存されているIT管理委員の名前を変更または追加します。"
+        Me.CommandLink9.Size = New System.Drawing.Size(550, 75)
+        Me.CommandLink9.TabIndex = 1
+        Me.CommandLink9.Text = "IT管理委員リストの変更(&S)"
+        Me.CommandLink9.UseVisualStyleBackColor = True
         '
         'LinkLabel1
         '
@@ -179,6 +195,17 @@ Partial Class MainForm
         Me.GroupBox5.TabIndex = 3
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "記入者情報(IT管理委員)"
+        '
+        'Button2
+        '
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Location = New System.Drawing.Point(480, 16)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(64, 23)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "更新(&R)"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'ComboBox2
         '
@@ -276,9 +303,9 @@ Partial Class MainForm
         Me.Label2.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label2.Location = New System.Drawing.Point(18, 48)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(80, 15)
+        Me.Label2.Size = New System.Drawing.Size(75, 15)
         Me.Label2.TabIndex = 2
-        Me.Label2.Text = "*ライセンスキー :"
+        Me.Label2.Text = "ライセンスキー :"
         '
         'ComboBox1
         '
@@ -307,7 +334,7 @@ Partial Class MainForm
         Me.DataPage.Controls.Add(Me.ListView1)
         Me.DataPage.Controls.Add(Me.CommandLink3)
         Me.DataPage.Name = "DataPage"
-        Me.DataPage.Size = New System.Drawing.Size(584, 296)
+        Me.DataPage.Size = New System.Drawing.Size(587, 307)
         Me.DataPage.TabIndex = 1
         Me.DataPage.Text = "固有データの確認"
         '
@@ -363,7 +390,7 @@ Partial Class MainForm
         Me.ProxyPage.Controls.Add(Me.GroupBox2)
         Me.ProxyPage.Controls.Add(Me.CommandLink6)
         Me.ProxyPage.Name = "ProxyPage"
-        Me.ProxyPage.Size = New System.Drawing.Size(584, 296)
+        Me.ProxyPage.Size = New System.Drawing.Size(587, 307)
         Me.ProxyPage.TabIndex = 2
         Me.ProxyPage.Text = "プロキシの設定"
         '
@@ -472,7 +499,7 @@ Partial Class MainForm
         Me.FinishPage.Controls.Add(Me.CommandLink4)
         Me.FinishPage.IsFinishPage = True
         Me.FinishPage.Name = "FinishPage"
-        Me.FinishPage.Size = New System.Drawing.Size(584, 296)
+        Me.FinishPage.Size = New System.Drawing.Size(587, 307)
         Me.FinishPage.TabIndex = 3
         Me.FinishPage.Text = "セットアップが完了しました"
         '
@@ -503,10 +530,10 @@ Partial Class MainForm
         Me.CommandLink5.Enabled = False
         Me.CommandLink5.Location = New System.Drawing.Point(3, 102)
         Me.CommandLink5.Name = "CommandLink5"
-        Me.CommandLink5.Note = "許可願に直接データを印刷できる文書ファイルを出力します。"
+        Me.CommandLink5.Note = "取得した情報をデータベースに送信します。"
         Me.CommandLink5.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink5.TabIndex = 17
-        Me.CommandLink5.Text = "PC持ち込み許可願に印刷(&P)(*検討中)"
+        Me.CommandLink5.Text = "データベースに送信(&D)"
         Me.CommandLink5.UseVisualStyleBackColor = True
         '
         'CommandLink4
@@ -518,27 +545,6 @@ Partial Class MainForm
         Me.CommandLink4.TabIndex = 16
         Me.CommandLink4.Text = "セットアップ レポートの出力(&N)"
         Me.CommandLink4.UseVisualStyleBackColor = True
-        '
-        'CommandLink9
-        '
-        Me.CommandLink9.Location = New System.Drawing.Point(3, 84)
-        Me.CommandLink9.Name = "CommandLink9"
-        Me.CommandLink9.Note = "保存されているIT管理委員の名前を変更または追加します。"
-        Me.CommandLink9.Size = New System.Drawing.Size(550, 75)
-        Me.CommandLink9.TabIndex = 1
-        Me.CommandLink9.Text = "IT管理委員リストの変更(&S)"
-        Me.CommandLink9.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(480, 16)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(64, 23)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "更新(&R)"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'MainForm
         '
@@ -574,7 +580,6 @@ Partial Class MainForm
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents StyleManager1 As DevComponents.DotNetBar.StyleManager
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
     Friend WithEvents WizardControl1 As AeroWizard.WizardControl
     Friend WithEvents MainPage As AeroWizard.WizardPage
@@ -617,4 +622,5 @@ Partial Class MainForm
     Friend WithEvents CommandLink8 As CommandLink
     Friend WithEvents CommandLink9 As CommandLink
     Friend WithEvents Button2 As Button
+    Friend WithEvents CommandLink10 As CommandLink
 End Class

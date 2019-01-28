@@ -21,7 +21,8 @@ Public Class MainForm
         {"シリアルナンバー", ""},
         {"OSバージョン", ""},
         {"MACアドレス", ""},
-        {"シリアルナンバーの有無", ""}}
+        {"シリアルナンバーの有無", ""}
+    }
     Private Sub Maker()
         Dim scope As ManagementScope = New ManagementScope("root\cimv2")
         scope.Connect()
@@ -262,6 +263,12 @@ Public Class MainForm
     Private Sub CommandLink4_Click(sender As Object, e As EventArgs) Handles CommandLink4.Click
         filename = "\Reports\report_" & number & ".pdf"
         Dim filepath As String = My.Application.Info.DirectoryPath & filename
+        If license.Length = 0 Then
+            license = "無し"
+        End If
+        If itname = "(選択してください)" Then
+            itname = "[使用者不明]"
+        End If
         CreatePdf(filepath)
         Try
             Report.AxAcroPDF1.LoadFile(filepath)
@@ -354,7 +361,7 @@ Public Class MainForm
                 sw.Close()
             End If
         Catch ex As Exception
-            MessageBox.Show("設定ファイルのロードにに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("設定ファイルのロードに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -365,5 +372,13 @@ Public Class MainForm
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         ComboBox2.Items.Clear()
         LoadSettings()
+    End Sub
+
+    Private Sub CommandLink10_Click(sender As Object, e As EventArgs) Handles CommandLink10.Click
+        Try
+            Dim updater As Process = Process.Start(".\Updater.exe")
+        Catch ex As Exception
+            MessageBox.Show("アップデータの起動に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class
