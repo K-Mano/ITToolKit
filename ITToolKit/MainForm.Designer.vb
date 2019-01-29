@@ -65,6 +65,7 @@ Partial Class MainForm
         Me.CommandLink7 = New System.Windows.Forms.CommandLink()
         Me.CommandLink5 = New System.Windows.Forms.CommandLink()
         Me.CommandLink4 = New System.Windows.Forms.CommandLink()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPage.SuspendLayout()
         Me.InfoPage.SuspendLayout()
@@ -229,6 +230,7 @@ Partial Class MainForm
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.CheckBox1)
         Me.GroupBox4.Controls.Add(Me.TextBox4)
         Me.GroupBox4.Controls.Add(Me.Label7)
         Me.GroupBox4.Controls.Add(Me.TextBox2)
@@ -243,10 +245,10 @@ Partial Class MainForm
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(252, 45)
+        Me.TextBox4.Location = New System.Drawing.Point(342, 45)
         Me.TextBox4.MaxLength = 7
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(222, 23)
+        Me.TextBox4.Size = New System.Drawing.Size(132, 23)
         Me.TextBox4.TabIndex = 6
         '
         'Label7
@@ -309,10 +311,9 @@ Partial Class MainForm
         '
         'ComboBox1
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"ESET", "ウイルスバスタークラウド", "カスペルスキーセキュリティ", "ノートンセキュリティ", "Avast AntiVirus", "AVG AntiVirus", "Avira AntiVirus", "(その他)"})
+        Me.ComboBox1.Items.AddRange(New Object() {"ESET", "ウイルスバスタークラウド", "カスペルスキーセキュリティ", "ノートンセキュリティ", "Avast AntiVirus", "AVG AntiVirus", "Avira AntiVirus"})
         Me.ComboBox1.Location = New System.Drawing.Point(252, 16)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(222, 23)
@@ -546,6 +547,16 @@ Partial Class MainForm
         Me.CommandLink4.Text = "セットアップ レポートの出力(&N)"
         Me.CommandLink4.UseVisualStyleBackColor = True
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(252, 47)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(86, 19)
+        Me.CheckBox1.TabIndex = 7
+        Me.CheckBox1.Text = "短期留学生"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -623,4 +634,5 @@ Partial Class MainForm
     Friend WithEvents CommandLink9 As CommandLink
     Friend WithEvents Button2 As Button
     Friend WithEvents CommandLink10 As CommandLink
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

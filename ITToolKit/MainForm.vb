@@ -6,7 +6,12 @@ Imports System.Management
 Imports iTextSharp.text.pdf
 Imports iText = iTextSharp.text
 Imports ClosedXML.Excel
+Imports System.Net
+
 Public Class MainForm
+    Dim newbuild As String = ".\NewestBuild.md"
+    Dim nowbuild As String = ".\CurrentBuild.md"
+    Dim downloadClient As WebClient = Nothing
     Dim phythicsnumber As String
     Dim dtNow As Date = Date.Now
     Dim antivirus As String
@@ -229,6 +234,17 @@ Public Class MainForm
             ListView1.Items(L).SubItems(0).Font = New Font("Consolas", 9)
         Next
         ComboBox1.SelectedItem = "ESET"
+        Try
+            If File.Exists(nowbuild) Then
+
+            Else
+                Dim vw As New StreamWriter(nowbuild, False, Encoding.GetEncoding("shift_jis"))
+                vw.Write(My.Application.Info.Version)
+                vw.Close()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("バージョン情報の格納に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -279,28 +295,70 @@ Public Class MainForm
     End Sub
 
     Private Sub CommandLink8_Click(sender As Object, e As EventArgs) Handles CommandLink8.Click
-        If TextBox2.TextLength > 0 And TextBox4.TextLength = 7 Then
-            If ComboBox1.SelectedItem = "ESET" Then
-                antivirus = ComboBox1.SelectedItem
-                license = TextBox1.Text
-                username = TextBox2.Text
-                number = TextBox4.Text
-                itname = ComboBox2.SelectedItem
-                WizardControl1.NextPage()
-            Else
-                If TextBox1.TextLength > 0 Then
-                    antivirus = ComboBox1.SelectedItem
-                    license = TextBox1.Text
-                    username = TextBox2.Text
-                    number = TextBox4.Text
-                    itname = ComboBox2.SelectedItem
-                    WizardControl1.NextPage()
+        If CheckBox1.Checked Then
+            If ComboBox1.Text.Length > 0 Then
+                If TextBox2.TextLength > 0 Then
+                    If TextBox4.TextLength = 9 Then
+                        If ComboBox1.SelectedItem = "ESET" Then
+                            antivirus = ComboBox1.SelectedItem
+                            license = TextBox1.Text
+                            username = TextBox2.Text
+                            number = TextBox4.Text
+                            itname = ComboBox2.SelectedItem
+                            WizardControl1.NextPage()
+                        Else
+                            If TextBox1.TextLength > 0 Then
+                                antivirus = ComboBox1.SelectedItem
+                                license = TextBox1.Text
+                                username = TextBox2.Text
+                                number = TextBox4.Text
+                                itname = ComboBox2.SelectedItem
+                                WizardControl1.NextPage()
+                            Else
+                                MessageBox.Show("ライセンスキーを入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End If
+                        End If
+                    Else
+                        MessageBox.Show("学籍番号を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
                 Else
-                    MessageBox.Show("必要事項を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("申請者の名前を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
+            Else
+                MessageBox.Show("ウイルス対策ソフトウェアを選択または入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Else
-            MessageBox.Show("必要事項を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If ComboBox1.Text.Length > 0 Then
+                If TextBox2.TextLength > 0 Then
+                    If TextBox4.TextLength = 7 Then
+                        If ComboBox1.SelectedItem = "ESET" Then
+                            antivirus = ComboBox1.SelectedItem
+                            license = TextBox1.Text
+                            username = TextBox2.Text
+                            number = TextBox4.Text
+                            itname = ComboBox2.SelectedItem
+                            WizardControl1.NextPage()
+                        Else
+                            If TextBox1.TextLength > 0 Then
+                                antivirus = ComboBox1.SelectedItem
+                                license = TextBox1.Text
+                                username = TextBox2.Text
+                                number = TextBox4.Text
+                                itname = ComboBox2.SelectedItem
+                                WizardControl1.NextPage()
+                            Else
+                                MessageBox.Show("ライセンスキーを入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End If
+                        End If
+                    Else
+                        MessageBox.Show("学籍番号を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                Else
+                    MessageBox.Show("申請者の名前を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                MessageBox.Show("ウイルス対策ソフトウェアを選択または入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End If
     End Sub
     Public Sub CreatePdf(savepath As String)
@@ -375,10 +433,50 @@ Public Class MainForm
     End Sub
 
     Private Sub CommandLink10_Click(sender As Object, e As EventArgs) Handles CommandLink10.Click
+        Dim nu As New Uri("https://github.com/K-Mano/ITToolKit/releases/download/VT/NewestBuild.md")
         Try
-            Dim updater As Process = Process.Start(".\Updater.exe")
+            If downloadClient Is Nothing Then
+                downloadClient = New WebClient()
+                AddHandler downloadClient.DownloadFileCompleted,
+                   AddressOf DownloadClient_DownloadFileCompleted
+            End If
+            downloadClient.DownloadFileAsync(nu, newbuild)
         Catch ex As Exception
-            MessageBox.Show("アップデータの起動に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("アップデート情報の取得に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub DownloadClient_DownloadFileCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
+        Try
+            Dim nb As New StreamReader(newbuild, Encoding.GetEncoding("Shift_JIS"))
+            Dim cb As New StreamReader(nowbuild, Encoding.GetEncoding("Shift_JIS"))
+            Dim newestVersion As String = nb.ReadToEnd()
+            nb.Close()
+            Dim currentVersion As String = cb.ReadToEnd()
+            cb.Close()
+            If currentVersion = newestVersion Then
+                MessageBox.Show("最新バージョンを使用中です。", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                Dim updateAns As DialogResult = MessageBox.Show("最新バージョンがあります。アップデートしますか？", "情報", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                If updateAns = DialogResult.Yes Then
+                    Process.Start(".\Updater.exe")
+                    End
+                    'ElseIf updateAns = DialogResult.No Then
+                    'Close()
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show("アップデート情報の取得に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked Then
+            TextBox4.MaxLength = 9
+            TextBox4.Text = "foreign"
+        Else
+            TextBox4.MaxLength = 7
+            TextBox4.Text = ""
+        End If
     End Sub
 End Class
