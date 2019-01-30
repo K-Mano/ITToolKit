@@ -1,4 +1,3 @@
-https://github.com/K-Mano/ITToolKit/releases/download/1.1.0.0/ITToolKit_Release1.1.0.0.zip
 # ITToolKit
 IT管理委員を支援するためのソフトウェアです。
 システム情報などを自動的に取得し、リストに表示します。また、Excel Book形式(.xlsx)
