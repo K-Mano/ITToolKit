@@ -26,6 +26,8 @@ Partial Class MainForm
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.WizardControl1 = New AeroWizard.WizardControl()
         Me.MainPage = New AeroWizard.WizardPage()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.CommandLink10 = New System.Windows.Forms.CommandLink()
         Me.CommandLink9 = New System.Windows.Forms.CommandLink()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
@@ -37,6 +39,7 @@ Partial Class MainForm
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -65,7 +68,6 @@ Partial Class MainForm
         Me.CommandLink7 = New System.Windows.Forms.CommandLink()
         Me.CommandLink5 = New System.Windows.Forms.CommandLink()
         Me.CommandLink4 = New System.Windows.Forms.CommandLink()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPage.SuspendLayout()
         Me.InfoPage.SuspendLayout()
@@ -87,11 +89,12 @@ Partial Class MainForm
         '
         'WizardControl1
         '
+        Me.WizardControl1.BackButtonToolTipText = "戻る(Alt+左矢印)"
         Me.WizardControl1.BackColor = System.Drawing.Color.White
         Me.WizardControl1.CancelButtonText = "キャンセル(&C)"
         Me.WizardControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.WizardControl1.FinishButtonText = "完了(&F)"
-        Me.WizardControl1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.WizardControl1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.WizardControl1.Location = New System.Drawing.Point(0, 0)
         Me.WizardControl1.Name = "WizardControl1"
         Me.WizardControl1.NextButtonText = "次へ(&N)"
@@ -109,6 +112,8 @@ Partial Class MainForm
         'MainPage
         '
         Me.MainPage.AllowNext = False
+        Me.MainPage.Controls.Add(Me.Label6)
+        Me.MainPage.Controls.Add(Me.LinkLabel2)
         Me.MainPage.Controls.Add(Me.CommandLink10)
         Me.MainPage.Controls.Add(Me.CommandLink9)
         Me.MainPage.Controls.Add(Me.LinkLabel1)
@@ -117,14 +122,34 @@ Partial Class MainForm
         Me.MainPage.NextPage = Me.InfoPage
         Me.MainPage.Size = New System.Drawing.Size(587, 307)
         Me.MainPage.TabIndex = 0
-        Me.MainPage.Text = "IT管理委員ToolKitへようこそ"
+        Me.MainPage.Text = "IT管理委員支援ToolKitへようこそ"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label6.Location = New System.Drawing.Point(91, 243)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(393, 15)
+        Me.Label6.TabIndex = 1
+        Me.Label6.Text = "重要:言語パックはベータ版です。正確な翻訳が行われていない可能性があります!"
+        '
+        'LinkLabel2
+        '
+        Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Location = New System.Drawing.Point(498, 285)
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.Size = New System.Drawing.Size(55, 15)
+        Me.LinkLabel2.TabIndex = 1
+        Me.LinkLabel2.TabStop = True
+        Me.LinkLabel2.Text = "拡張機能"
         '
         'CommandLink10
         '
+        Me.CommandLink10.Icon = CType(resources.GetObject("CommandLink10.Icon"), System.Drawing.Icon)
         Me.CommandLink10.Location = New System.Drawing.Point(3, 165)
         Me.CommandLink10.Name = "CommandLink10"
-        Me.CommandLink10.Note = "アップデート サーバーに接続して最新バージョンを確認します。"
-        Me.CommandLink10.ShowShield = True
+        Me.CommandLink10.Note = "開発者のリポジトリに接続して最新バージョンを確認します。"
         Me.CommandLink10.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink10.TabIndex = 13
         Me.CommandLink10.Text = "アップデートの確認(&U)"
@@ -132,12 +157,13 @@ Partial Class MainForm
         '
         'CommandLink9
         '
+        Me.CommandLink9.Icon = CType(resources.GetObject("CommandLink9.Icon"), System.Drawing.Icon)
         Me.CommandLink9.Location = New System.Drawing.Point(3, 84)
         Me.CommandLink9.Name = "CommandLink9"
-        Me.CommandLink9.Note = "保存されているIT管理委員の名前を変更または追加します。"
+        Me.CommandLink9.Note = "このソフトウェアの設定画面を変更します。"
         Me.CommandLink9.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink9.TabIndex = 1
-        Me.CommandLink9.Text = "IT管理委員リストの変更(&S)"
+        Me.CommandLink9.Text = "設定の変更(&S)"
         Me.CommandLink9.UseVisualStyleBackColor = True
         '
         'LinkLabel1
@@ -152,9 +178,10 @@ Partial Class MainForm
         '
         'CommandLink1
         '
+        Me.CommandLink1.Icon = CType(resources.GetObject("CommandLink1.Icon"), System.Drawing.Icon)
         Me.CommandLink1.Location = New System.Drawing.Point(3, 3)
         Me.CommandLink1.Name = "CommandLink1"
-        Me.CommandLink1.Note = "PC許可願に必要な固有データの確認やプロキシの設定を行います。"
+        Me.CommandLink1.Note = "PC許可願を提出するために必要なデータの確認やプロキシの設定を行います。"
         Me.CommandLink1.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink1.TabIndex = 10
         Me.CommandLink1.Text = "新しいPCのセットアップ(&N)"
@@ -172,16 +199,16 @@ Partial Class MainForm
         Me.InfoPage.ShowNext = False
         Me.InfoPage.Size = New System.Drawing.Size(587, 307)
         Me.InfoPage.TabIndex = 4
-        Me.InfoPage.Text = "レポートに必要な情報を入力"
+        Me.InfoPage.Text = "PC許可願に必要な情報を入力"
         '
         'CommandLink8
         '
         Me.CommandLink8.Location = New System.Drawing.Point(3, 221)
         Me.CommandLink8.Name = "CommandLink8"
-        Me.CommandLink8.Note = "入力された情報をレポートに記録して続けます。"
+        Me.CommandLink8.Note = "入力されたデータを確定して次へ進みます。"
         Me.CommandLink8.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink8.TabIndex = 1
-        Me.CommandLink8.Text = "確定して次のステップへ進む(&N)"
+        Me.CommandLink8.Text = "次のステップへ進む(&N)"
         Me.CommandLink8.UseVisualStyleBackColor = True
         '
         'GroupBox5
@@ -201,9 +228,9 @@ Partial Class MainForm
         '
         Me.Button2.FlatAppearance.BorderSize = 0
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(480, 16)
+        Me.Button2.Location = New System.Drawing.Point(444, 15)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(64, 23)
+        Me.Button2.Size = New System.Drawing.Size(79, 23)
         Me.Button2.TabIndex = 3
         Me.Button2.Text = "更新(&R)"
         Me.Button2.UseVisualStyleBackColor = True
@@ -213,9 +240,9 @@ Partial Class MainForm
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(252, 16)
+        Me.ComboBox2.Location = New System.Drawing.Point(200, 16)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(222, 23)
+        Me.ComboBox2.Size = New System.Drawing.Size(220, 23)
         Me.ComboBox2.TabIndex = 2
         '
         'Label5
@@ -243,9 +270,19 @@ Partial Class MainForm
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "使用者情報"
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(338, 47)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(86, 19)
+        Me.CheckBox1.TabIndex = 7
+        Me.CheckBox1.Text = "短期留学生"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(342, 45)
+        Me.TextBox4.Location = New System.Drawing.Point(200, 45)
         Me.TextBox4.MaxLength = 7
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(132, 23)
@@ -263,9 +300,9 @@ Partial Class MainForm
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(252, 16)
+        Me.TextBox2.Location = New System.Drawing.Point(200, 16)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(222, 23)
+        Me.TextBox2.Size = New System.Drawing.Size(220, 23)
         Me.TextBox2.TabIndex = 2
         '
         'Label3
@@ -294,9 +331,9 @@ Partial Class MainForm
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(252, 45)
+        Me.TextBox1.Location = New System.Drawing.Point(200, 45)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(222, 23)
+        Me.TextBox1.Size = New System.Drawing.Size(220, 23)
         Me.TextBox1.TabIndex = 3
         '
         'Label2
@@ -314,9 +351,9 @@ Partial Class MainForm
         Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"ESET", "ウイルスバスタークラウド", "カスペルスキーセキュリティ", "ノートンセキュリティ", "Avast AntiVirus", "AVG AntiVirus", "Avira AntiVirus"})
-        Me.ComboBox1.Location = New System.Drawing.Point(252, 16)
+        Me.ComboBox1.Location = New System.Drawing.Point(200, 16)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(222, 23)
+        Me.ComboBox1.Size = New System.Drawing.Size(220, 23)
         Me.ComboBox1.TabIndex = 1
         '
         'Label1
@@ -337,7 +374,7 @@ Partial Class MainForm
         Me.DataPage.Name = "DataPage"
         Me.DataPage.Size = New System.Drawing.Size(587, 307)
         Me.DataPage.TabIndex = 1
-        Me.DataPage.Text = "固有データの確認"
+        Me.DataPage.Text = "システム情報の確認"
         '
         'Button1
         '
@@ -354,7 +391,7 @@ Partial Class MainForm
         '
         Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.DataName, Me.Data})
-        Me.ListView1.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView1.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!)
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(3, 3)
@@ -373,13 +410,13 @@ Partial Class MainForm
         'Data
         '
         Me.Data.Text = "固有データ"
-        Me.Data.Width = 200
+        Me.Data.Width = 300
         '
         'CommandLink3
         '
         Me.CommandLink3.Location = New System.Drawing.Point(3, 218)
         Me.CommandLink3.Name = "CommandLink3"
-        Me.CommandLink3.Note = "固有データのリストを指定された形式で出力します。"
+        Me.CommandLink3.Note = "収集したデータのリストを指定された形式で出力します。"
         Me.CommandLink3.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink3.TabIndex = 9
         Me.CommandLink3.Text = "名前を付けてデータを保存(&A)..."
@@ -400,7 +437,7 @@ Partial Class MainForm
         Me.GroupBox1.Controls.Add(Me.actie)
         Me.GroupBox1.Controls.Add(Me.noneie)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.GroupBox1.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!)
         Me.GroupBox1.Location = New System.Drawing.Point(2, 2)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
@@ -414,7 +451,7 @@ Partial Class MainForm
         '
         Me.actie.AutoSize = True
         Me.actie.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.actie.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.actie.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!)
         Me.actie.Location = New System.Drawing.Point(13, 47)
         Me.actie.Margin = New System.Windows.Forms.Padding(2)
         Me.actie.Name = "actie"
@@ -428,7 +465,7 @@ Partial Class MainForm
         Me.noneie.AutoSize = True
         Me.noneie.Checked = True
         Me.noneie.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.noneie.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.noneie.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!)
         Me.noneie.Location = New System.Drawing.Point(13, 20)
         Me.noneie.Margin = New System.Windows.Forms.Padding(2)
         Me.noneie.Name = "noneie"
@@ -443,7 +480,7 @@ Partial Class MainForm
         Me.GroupBox2.Controls.Add(Me.actsys)
         Me.GroupBox2.Controls.Add(Me.nonesys)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.GroupBox2.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox2.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!)
         Me.GroupBox2.Location = New System.Drawing.Point(2, 106)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Name = "GroupBox2"
@@ -457,7 +494,7 @@ Partial Class MainForm
         '
         Me.actsys.AutoSize = True
         Me.actsys.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.actsys.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.actsys.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!)
         Me.actsys.Location = New System.Drawing.Point(13, 50)
         Me.actsys.Margin = New System.Windows.Forms.Padding(2)
         Me.actsys.Name = "actsys"
@@ -471,7 +508,7 @@ Partial Class MainForm
         Me.nonesys.AutoSize = True
         Me.nonesys.Checked = True
         Me.nonesys.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.nonesys.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nonesys.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!)
         Me.nonesys.Location = New System.Drawing.Point(13, 23)
         Me.nonesys.Margin = New System.Windows.Forms.Padding(2)
         Me.nonesys.Name = "nonesys"
@@ -486,9 +523,10 @@ Partial Class MainForm
         Me.CommandLink6.Location = New System.Drawing.Point(2, 218)
         Me.CommandLink6.Name = "CommandLink6"
         Me.CommandLink6.Note = "すべての設定を反映します。"
+        Me.CommandLink6.ShowShield = True
         Me.CommandLink6.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink6.TabIndex = 14
-        Me.CommandLink6.Text = "すべてに適用(&A)"
+        Me.CommandLink6.Text = "適用する(&A)"
         Me.CommandLink6.UseVisualStyleBackColor = True
         '
         'FinishPage
@@ -520,18 +558,19 @@ Partial Class MainForm
         '
         Me.CommandLink7.Location = New System.Drawing.Point(3, 183)
         Me.CommandLink7.Name = "CommandLink7"
-        Me.CommandLink7.Note = "IT管理委員ToolKitを終了します。"
+        Me.CommandLink7.Note = "アプリケーションを終了します。"
         Me.CommandLink7.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink7.TabIndex = 18
-        Me.CommandLink7.Text = "終了(&E)"
+        Me.CommandLink7.Text = "終了(&X)"
         Me.CommandLink7.UseVisualStyleBackColor = True
         '
         'CommandLink5
         '
         Me.CommandLink5.Enabled = False
+        Me.CommandLink5.Icon = CType(resources.GetObject("CommandLink5.Icon"), System.Drawing.Icon)
         Me.CommandLink5.Location = New System.Drawing.Point(3, 102)
         Me.CommandLink5.Name = "CommandLink5"
-        Me.CommandLink5.Note = "取得した情報をデータベースに送信します。"
+        Me.CommandLink5.Note = "収集したデータをデータベースに送信します。"
         Me.CommandLink5.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink5.TabIndex = 17
         Me.CommandLink5.Text = "データベースに送信(&D)"
@@ -539,23 +578,14 @@ Partial Class MainForm
         '
         'CommandLink4
         '
+        Me.CommandLink4.Icon = CType(resources.GetObject("CommandLink4.Icon"), System.Drawing.Icon)
         Me.CommandLink4.Location = New System.Drawing.Point(3, 21)
         Me.CommandLink4.Name = "CommandLink4"
-        Me.CommandLink4.Note = "セットアップ レポートをpdf形式(*.pdf)で出力します。"
+        Me.CommandLink4.Note = "収集したデータをPC許可願のフォーマットで出力します。"
         Me.CommandLink4.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink4.TabIndex = 16
-        Me.CommandLink4.Text = "セットアップ レポートの出力(&N)"
+        Me.CommandLink4.Text = "PC持込許可願の出力(&A)"
         Me.CommandLink4.UseVisualStyleBackColor = True
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(252, 47)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(86, 19)
-        Me.CheckBox1.TabIndex = 7
-        Me.CheckBox1.Text = "短期留学生"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'MainForm
         '
@@ -566,7 +596,6 @@ Partial Class MainForm
         Me.Controls.Add(Me.WizardControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "MainForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "IT管理委員支援ToolKit"
@@ -635,4 +664,6 @@ Partial Class MainForm
     Friend WithEvents Button2 As Button
     Friend WithEvents CommandLink10 As CommandLink
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents LinkLabel2 As LinkLabel
+    Friend WithEvents Label6 As Label
 End Class

@@ -10,8 +10,8 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("ITToolKit")>
 <Assembly: AssemblyDescription("IT管理委員支援ソフトウェア")>
-<Assembly: AssemblyCompany("ACT Information Development@nsip.org")>
-<Assembly: AssemblyProduct("ITToolKit")>
+<Assembly: AssemblyCompany("ACT Information Development.org")>
+<Assembly: AssemblyProduct("ITToolKit™")>
 <Assembly: AssemblyCopyright("Copyright © 2017-2019 nsip.org All Rights Reserved.")>
 <Assembly: AssemblyTrademark("")>
 

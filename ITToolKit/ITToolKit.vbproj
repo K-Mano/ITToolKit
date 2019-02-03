@@ -138,6 +138,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase.Designer.vb">
+      <DependentUpon>DataBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtentionsList.Designer.vb">
+      <DependentUpon>ExtentionsList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ExtentionsList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InfomationForm.Designer.vb">
       <DependentUpon>InfomationForm.vb</DependentUpon>
     </Compile>
@@ -172,10 +184,25 @@
     <Compile Include="Report.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Settings.Designer.vb">
+      <DependentUpon>Settings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DataBase.resx">
+      <DependentUpon>DataBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtentionsList.resx">
+      <DependentUpon>ExtentionsList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InfomationForm.resx">
       <DependentUpon>InfomationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.ja-JP.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
@@ -188,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report.resx">
       <DependentUpon>Report.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -117,26 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TextBoxDescription.Text" xml:space="preserve">
-    <value>Developed by K. Mano@nsip.org
-----------------------------------------------
-Special Thanks for
-Naoki Takahashi(Tester)
-Keiichiro Miyamoto(Tester)
-Teruya Nagao(Tester)
-----------------------------------------------
-Thanks for
-*All Beta Testers;
-Shintaro Ueta
-Masayuki Yuguchi
-Hikaru Shinohara
-Toyozo Shimada
-Tomoki Sekiguchi
-*All Package Creators;
-AeroWizard
-ClosedXML
-iTextSharp
-DotNetBar
-</value>
-  </data>
 </root>

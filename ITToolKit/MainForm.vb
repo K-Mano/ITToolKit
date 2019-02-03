@@ -9,6 +9,9 @@ Imports ClosedXML.Excel
 Imports System.Net
 
 Public Class MainForm
+    Public Extentions As String
+    Public CurrentLanguage As String
+    Dim LanguageAuthor As String
     Dim newbuild As String = ".\NewestBuild.md"
     Dim nowbuild As String = ".\CurrentBuild.md"
     Dim downloadClient As WebClient = Nothing
@@ -105,8 +108,7 @@ Public Class MainForm
     End Sub
 
     Private Sub CommandLink5_Click(sender As Object, e As EventArgs) Handles CommandLink5.Click
-        MainPage.NextPage = MainPage
-        WizardControl1.NextPage()
+        DataBase.Show()
     End Sub
     Private Sub SaveDataListForText()
         Dim itemx As ListViewItem = New ListViewItem()
@@ -197,29 +199,51 @@ Public Class MainForm
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         InfomationForm.Show()
     End Sub
-
-    Private Sub CommandLink6_Click(sender As Object, e As EventArgs) Handles CommandLink6.Click
+    Sub RunCMD(strcmd As String)
         Try
-            Dim ShellObj
-            ShellObj = CreateObject("WScript.Shell")
-            If noneie.Checked Then
-                Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 0")
-            ElseIf actie.Checked Then
-                Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 1")
-                Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyServer /t reg_sz /d proxy.anan-nct.ac.jp:8080")
-                Call ShellObj.Run("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyOverride /t reg_sz /d ""192.168.0.50;<local>""")
-            End If
-            If nonesys.Checked Then
-                Call ShellObj.Run("netsh winhttp reset proxy")
-            ElseIf actsys.Checked Then
-                Call ShellObj.Run("netsh winhttp set proxy proxy-server=""proxy.anan-nct.ac.jp:8080"" bypass-list=""192.168.0.50""")
-            End If
+            Dim proc As New Process()
+            With proc.StartInfo
+                .FileName = Environment.GetEnvironmentVariable("ComSpec")
+                .CreateNoWindow = True
+                .Arguments = "/c " & strcmd
+            End With
+            proc.Start()
+            proc.WaitForExit()
+            proc.Close()
         Catch ex As Exception
             MessageBox.Show("プロキシの設定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub CommandLink6_Click(sender As Object, e As EventArgs) Handles CommandLink6.Click
+        Dim ShellObj
+        ShellObj = CreateObject("WScript.Shell")
+        If noneie.Checked Then
+            RunCMD("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 0")
+        ElseIf actie.Checked Then
+            RunCMD("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyEnable /t reg_dword /d 1")
+            RunCMD("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyServer /t reg_sz /d proxy.anan-nct.ac.jp:8080")
+            RunCMD("reg add ""HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings"" /f /v ProxyOverride /t reg_sz /d ""192.168.0.50;<local>""")
+        End If
+        If nonesys.Checked Then
+            RunCMD("netsh winhttp reset proxy")
+        ElseIf actsys.Checked Then
+            RunCMD("netsh winhttp set proxy proxy-server=""proxy.anan-nct.ac.jp:8080"" bypass-list=""192.168.0.50""")
+        End If
+    End Sub
+    Public Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim fs As String() = Directory.GetFiles(".\languages", "*.lng")
+        Dim f As String
+        For Each f In fs
+            Settings.ComboBox1.Items.Add(Path.GetFileNameWithoutExtension(f))
+        Next
         LoadSettings()
+        Initialization()
+        LoadLanguages(CurrentLanguage)
+        Try
+            Settings.ComboBox1.SelectedItem = CurrentLanguage.Replace(".lng", String.Empty)
+        Catch ex As Exception
+
+        End Try
         Maker()
         Hardware()
         OSVersion()
@@ -422,9 +446,229 @@ Public Class MainForm
             MessageBox.Show("設定ファイルのロードに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+    Public Sub Initialization()
+        If Directory.Exists(".\languages") Then
+        Else
+            Directory.CreateDirectory(".\languages")
+        End If
+        If File.Exists(".\languages\Preference.ini") Then
+            Dim cReader As New StreamReader(".\languages\Preference.ini", Encoding.Default)
+            CurrentLanguage = cReader.ReadLine
+            Extentions = cReader.ReadLine
+            cReader.Close()
+            If Extentions = "Extentions=true" Then
+                LinkLabel2.Enabled = True
+            Else
+                LinkLabel2.Enabled = False
+            End If
+        Else
+            Dim pf As New StreamWriter(".\languages\Preference.ini", True, Encoding.GetEncoding("shift_jis"))
+            pf.WriteLine("Japanese.lng")
+            pf.WriteLine("Extentions=false")
+            pf.Close()
+            Dim sw As New StreamWriter(".\languages\Japanese.lng", True, Encoding.GetEncoding("shift_jis"))
+            '言語パックタイトル
+            sw.WriteLine("Japanese(日本語) by K-Mano@nsip.org")
+            'MainPage
+            sw.WriteLine(Text)
+            sw.WriteLine(WizardControl1.Title)
+            sw.WriteLine(MainPage.Text)
+            sw.WriteLine(CommandLink1.Text)
+            sw.WriteLine(CommandLink1.Note)
+            sw.WriteLine(CommandLink9.Text)
+            sw.WriteLine(CommandLink9.Note)
+            sw.WriteLine(CommandLink10.Text)
+            sw.WriteLine(CommandLink10.Note)
+            sw.WriteLine(LinkLabel1.Text)
+            sw.WriteLine(WizardControl1.BackButtonToolTipText)
+            sw.WriteLine(WizardControl1.CancelButtonText)
+            sw.WriteLine(WizardControl1.NextButtonText)
+            'InfoPage
+            sw.WriteLine(InfoPage.Text)
+            sw.WriteLine(GroupBox3.Text)
+            sw.WriteLine(Label1.Text)
+            sw.WriteLine(Label2.Text)
+            sw.WriteLine(GroupBox4.Text)
+            sw.WriteLine(Label3.Text)
+            sw.WriteLine(Label7.Text)
+            sw.WriteLine(CheckBox1.Text)
+            sw.WriteLine(GroupBox5.Text)
+            sw.WriteLine(Label5.Text)
+            sw.WriteLine(Button2.Text)
+            sw.WriteLine(CommandLink8.Text)
+            sw.WriteLine(CommandLink8.Note)
+            'DataPage
+            sw.WriteLine(DataPage.Text)
+            sw.WriteLine(Button1.Text)
+            sw.WriteLine(CommandLink3.Text)
+            sw.WriteLine(CommandLink3.Note)
+            'ProxyPage
+            sw.WriteLine(ProxyPage.Text)
+            sw.WriteLine(GroupBox1.Text)
+            sw.WriteLine(noneie.Text)
+            sw.WriteLine(actie.Text)
+            sw.WriteLine(GroupBox2.Text)
+            sw.WriteLine(nonesys.Text)
+            sw.WriteLine(actsys.Text)
+            sw.WriteLine(CommandLink6.Text)
+            sw.WriteLine(CommandLink6.Note)
+            'FinishPage
+            sw.WriteLine(FinishPage.Text)
+            sw.WriteLine(Label4.Text)
+            sw.WriteLine(CommandLink4.Text)
+            sw.WriteLine(CommandLink4.Note)
+            sw.WriteLine(CommandLink5.Text)
+            sw.WriteLine(CommandLink5.Note)
+            sw.WriteLine(CommandLink7.Text)
+            sw.WriteLine(CommandLink7.Note)
+            'PDFのプレビューウィンドウ
+            sw.WriteLine(Report.Text)
+            sw.WriteLine(Report.ファイルFToolStripMenuItem.Text)
+            sw.WriteLine(Report.表示VToolStripMenuItem.Text)
+            sw.WriteLine(Report.更新RToolStripMenuItem.Text)
+            sw.WriteLine(Report.操作AToolStripMenuItem.Text)
+            sw.WriteLine(Report.名前を付けて保存AToolStripMenuItem.Text)
+            sw.WriteLine(Report.ヘルプHToolStripMenuItem.Text)
+            sw.WriteLine(Report.バージョン情報VToolStripMenuItem.Text)
+            sw.WriteLine(Report.セットアップに戻るEToolStripMenuItem.Text)
+            '設定ウィンドウ
+            sw.WriteLine(Settings.Text)
+            sw.WriteLine(Settings.GroupBox1.Text)
+            sw.WriteLine(Settings.Label1.Text)
+            sw.WriteLine(Settings.Button1.Text)
+            sw.WriteLine(Settings.Button2.Text)
+            sw.WriteLine(Settings.Label2.Text)
+            sw.WriteLine(Settings.GroupBox2.Text)
+            sw.WriteLine(Settings.ListView1.Columns(0).Text)
+            sw.WriteLine(Settings.ListView1.Items(0).Text)
+            sw.WriteLine(Settings.ListView1.Items(1).Text)
+            '拡張機能ウィンドウ
+            sw.WriteLine(ExtentionsList.Text)
+            sw.WriteLine(ExtentionsList.CommandLink1.Text)
+            sw.WriteLine(ExtentionsList.CommandLink1.Note)
+            sw.WriteLine(ExtentionsList.ファイルFToolStripMenuItem.Text)
+            sw.WriteLine(ExtentionsList.操作CToolStripMenuItem.Text)
+            sw.WriteLine(ExtentionsList.ヘルプHToolStripMenuItem.Text)
+            sw.WriteLine(ExtentionsList.終了XToolStripMenuItem.Text)
+            sw.WriteLine(ExtentionsList.更新RToolStripMenuItem.Text)
+            sw.WriteLine(ExtentionsList.バージョン情報ToolStripMenuItem.Text)
+            sw.WriteLine(ExtentionsList.GroupBox1.Text)
+            sw.WriteLine(ExtentionsList.Label1.Text)
+            sw.WriteLine(ExtentionsList.Label2.Text)
+            sw.WriteLine(ExtentionsList.Label3.Text)
+            sw.WriteLine(ExtentionsList.Label4.Text)
+            sw.WriteLine(ExtentionsList.ListView1.Columns(0).Text)
+            sw.WriteLine(ExtentionsList.ListView1.Columns(1).Text)
 
+            sw.Close()
+        End If
+    End Sub
+    Sub LoadLanguages(language As String)
+        Try
+            Dim cReader As New StreamReader(".\languages\" & language, Encoding.Default)
+            Dim l As Integer = 0
+            Dim langBuffer(100) As String
+            While cReader.Peek() >= 0
+                langBuffer(l) = cReader.ReadLine()
+                l = l + 1
+            End While
+            cReader.Close()
+            Settings.Label3.Text = langBuffer(0)
+            Text = langBuffer(1)
+            WizardControl1.Title = langBuffer(2)
+            CommandLink1.Text = langBuffer(4)
+            CommandLink1.Note = langBuffer(5)
+            CommandLink9.Text = langBuffer(6)
+            CommandLink9.Note = langBuffer(7)
+            CommandLink10.Text = langBuffer(8)
+            CommandLink10.Note = langBuffer(9)
+            LinkLabel1.Text = langBuffer(10)
+            WizardControl1.BackButtonToolTipText = langBuffer(11)
+            WizardControl1.CancelButtonText = langBuffer(12)
+            WizardControl1.NextButtonText = langBuffer(13)
+            'InfoPage
+            InfoPage.Text = langBuffer(14)
+            GroupBox3.Text = langBuffer(15)
+            Label1.Text = langBuffer(16)
+            Label2.Text = langBuffer(17)
+            GroupBox4.Text = langBuffer(18)
+            Label3.Text = langBuffer(19)
+            Label7.Text = langBuffer(20)
+            CheckBox1.Text = langBuffer(21)
+            GroupBox5.Text = langBuffer(22)
+            Label5.Text = langBuffer(23)
+            Button2.Text = langBuffer(24)
+            CommandLink8.Text = langBuffer(25)
+            CommandLink8.Note = langBuffer(26)
+            'DataPage
+            DataPage.Text = langBuffer(27)
+            Button1.Text = langBuffer(28)
+            CommandLink3.Text = langBuffer(29)
+            CommandLink3.Note = langBuffer(30)
+            'ProxyPage
+            ProxyPage.Text = langBuffer(31)
+            GroupBox1.Text = langBuffer(32)
+            noneie.Text = langBuffer(33)
+            actie.Text = langBuffer(34)
+            GroupBox2.Text = langBuffer(35)
+            nonesys.Text = langBuffer(36)
+            actsys.Text = langBuffer(37)
+            CommandLink6.Text = langBuffer(38)
+            CommandLink6.Note = langBuffer(39)
+            'FinishPage
+            FinishPage.Text = langBuffer(40)
+            Label4.Text = langBuffer(41)
+            CommandLink4.Text = langBuffer(42)
+            CommandLink4.Note = langBuffer(43)
+            CommandLink5.Text = langBuffer(44)
+            CommandLink5.Note = langBuffer(45)
+            CommandLink7.Text = langBuffer(46)
+            CommandLink7.Note = langBuffer(47)
+            'PDFのプレビューウィンドウ
+            Report.Text = langBuffer(48)
+            Report.ファイルFToolStripMenuItem.Text = langBuffer(49)
+            Report.表示VToolStripMenuItem.Text = langBuffer(50)
+            Report.更新RToolStripMenuItem.Text = langBuffer(51)
+            Report.操作AToolStripMenuItem.Text = langBuffer(52)
+            Report.名前を付けて保存AToolStripMenuItem.Text = langBuffer(53)
+            Report.ヘルプHToolStripMenuItem.Text = langBuffer(54)
+            Report.バージョン情報VToolStripMenuItem.Text = langBuffer(55)
+            Report.セットアップに戻るEToolStripMenuItem.Text = langBuffer(56)
+            '設定ウィンドウ
+            Settings.Text = langBuffer(57)
+            Settings.GroupBox1.Text = langBuffer(58)
+            Settings.Label1.Text = langBuffer(59)
+            Settings.Button1.Text = langBuffer(60)
+            Settings.Button2.Text = langBuffer(61)
+            Settings.Label2.Text = langBuffer(62)
+            Settings.GroupBox2.Text = langBuffer(63)
+            Settings.ListView1.Columns(0).Text = langBuffer(64)
+            Settings.ListView1.Items(0).Text = langBuffer(65)
+            Settings.ListView1.Items(1).Text = langBuffer(66)
+            '拡張機能ウィンドウ
+            ExtentionsList.Text = langBuffer(67)
+            ExtentionsList.CommandLink1.Text = langBuffer(68)
+            ExtentionsList.CommandLink1.Note = langBuffer(69)
+            ExtentionsList.ファイルFToolStripMenuItem.Text = langBuffer(70)
+            ExtentionsList.操作CToolStripMenuItem.Text = langBuffer(71)
+            ExtentionsList.ヘルプHToolStripMenuItem.Text = langBuffer(72)
+            ExtentionsList.終了XToolStripMenuItem.Text = langBuffer(73)
+            ExtentionsList.更新RToolStripMenuItem.Text = langBuffer(74)
+            ExtentionsList.バージョン情報ToolStripMenuItem.Text = langBuffer(75)
+            ExtentionsList.GroupBox1.Text = langBuffer(76)
+            ExtentionsList.Label1.Text = langBuffer(77)
+            ExtentionsList.Label2.Text = langBuffer(78)
+            ExtentionsList.Label3.Text = langBuffer(79)
+            ExtentionsList.Label4.Text = langBuffer(80)
+            ExtentionsList.ListView1.Columns(0).Text = langBuffer(81)
+            ExtentionsList.ListView1.Columns(1).Text = langBuffer(82)
+            MainPage.Text = langBuffer(3)
+        Catch ex As Exception
+            MessageBox.Show("言語ファイルのロードに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
     Private Sub CommandLink9_Click(sender As Object, e As EventArgs) Handles CommandLink9.Click
-        Dim p As Process = Process.Start(".\Settings.dat")
+        Settings.Show()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -455,14 +699,12 @@ Public Class MainForm
             Dim currentVersion As String = cb.ReadToEnd()
             cb.Close()
             If currentVersion = newestVersion Then
-                MessageBox.Show("最新バージョンを使用中です。", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("最新バージョンを使用中です。(" + currentVersion + ")", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
                 Dim updateAns As DialogResult = MessageBox.Show("最新バージョンがあります。アップデートしますか？", "情報", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
                 If updateAns = DialogResult.Yes Then
                     Process.Start(".\Updater.exe")
                     End
-                    'ElseIf updateAns = DialogResult.No Then
-                    'Close()
                 End If
             End If
         Catch ex As Exception
@@ -478,5 +720,9 @@ Public Class MainForm
             TextBox4.MaxLength = 7
             TextBox4.Text = ""
         End If
+    End Sub
+
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        ExtentionsList.Show()
     End Sub
 End Class
