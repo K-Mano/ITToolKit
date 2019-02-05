@@ -25,5 +25,5 @@ Extract the archive, and run "ITToolKit.exe" to complete.
 This software is released under the MIT License, see LICENSE.
 
 # Authors
-K-Mano@nsip.org
+K-Mano@ACT-Information-Dev.org
 
