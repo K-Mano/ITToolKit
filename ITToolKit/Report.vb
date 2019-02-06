@@ -1,5 +1,16 @@
 ﻿Imports System.ComponentModel
 
+'*****************************************************************************************************
+'
+'   ITToolKit(TM) ReportForm
+'
+'   Export the Reports
+'
+'   Copyright (c) 2018-2019 ACT Information Dev.org All Rights Reserved.
+'   Licensed under the MIT License.
+'
+'*****************************************************************************************************
+
 Public Class Report
     Private Sub セットアップに戻るEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles セットアップに戻るEToolStripMenuItem.Click
         Close()

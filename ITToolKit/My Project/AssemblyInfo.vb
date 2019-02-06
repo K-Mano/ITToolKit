@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("IT管理委員支援ソフトウェア")>
 <Assembly: AssemblyCompany("ACT Information Development.org")>
 <Assembly: AssemblyProduct("ITToolKit™")>
-<Assembly: AssemblyCopyright("Copyright © 2017-2019 nsip.org All Rights Reserved.")>
+<Assembly: AssemblyCopyright("Copyright © 2018-2019 ACT Information Dev.org All Rights Reserved.")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' 既定値にすることができます:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.1")>
-<Assembly: AssemblyFileVersion("1.1")>
+<Assembly: AssemblyVersion("1.2")>
+<Assembly: AssemblyFileVersion("1.2")>

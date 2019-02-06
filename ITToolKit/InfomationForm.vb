@@ -1,4 +1,16 @@
-﻿Public NotInheritable Class InfomationForm
+﻿
+'*****************************************************************************************************
+'
+'   ITToolKit(TM) InformationForm
+'
+'   Informations
+'
+'   Copyright (c) 2018-2019 ACT Information Dev.org All Rights Reserved.
+'   Licensed under the MIT License.
+'
+'*****************************************************************************************************
+
+Public NotInheritable Class InfomationForm
 
     Private Sub InfomationForm_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Dim ApplicationTitle As String

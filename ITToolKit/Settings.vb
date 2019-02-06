@@ -1,6 +1,17 @@
 ﻿Imports System.IO
 Imports System.Text
 
+'*****************************************************************************************************
+'
+'   ITToolKit(TM) Settings
+'
+'   Settings
+'
+'   Copyright (c) 2018-2019 ACT Information Dev.org All Rights Reserved.
+'   Licensed under the MIT License.
+'
+'*****************************************************************************************************
+
 Public Class Settings
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         MainForm.LoadLanguages(ComboBox1.SelectedItem + ".lng")

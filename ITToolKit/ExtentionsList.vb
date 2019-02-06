@@ -1,6 +1,17 @@
 ﻿Imports System.IO
 Imports System.Reflection
 
+'*****************************************************************************************************
+'
+'   ITToolKit(TM) ExtentionsList
+'
+'   Provides extensions for ITToolKit.
+'
+'   Copyright (c) 2018-2019 ACT Information Dev.org All Rights Reserved.
+'   Licensed under the MIT License.
+'
+'*****************************************************************************************************
+
 Public Class ExtentionsList
     Private Sub ExtentionsList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadExtentions()
@@ -65,16 +76,16 @@ Public Class ExtentionsList
         End Try
     End Sub
 
-    Private Sub 更新RToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 更新RToolStripMenuItem.Click
+    Private Sub 更新RToolStripMenuItem_Click(sender As Object, e As EventArgs)
         ListView1.Items.Clear()
         LoadExtentions()
     End Sub
 
-    Private Sub 終了XToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 終了XToolStripMenuItem.Click
+    Private Sub 終了XToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Close()
     End Sub
 
-    Private Sub バージョン情報ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles バージョン情報ToolStripMenuItem.Click
+    Private Sub バージョン情報ToolStripMenuItem_Click(sender As Object, e As EventArgs)
         InfomationForm.Show()
     End Sub
 End Class

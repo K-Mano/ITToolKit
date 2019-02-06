@@ -26,7 +26,6 @@ Partial Class MainForm
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.WizardControl1 = New AeroWizard.WizardControl()
         Me.MainPage = New AeroWizard.WizardPage()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.CommandLink10 = New System.Windows.Forms.CommandLink()
         Me.CommandLink9 = New System.Windows.Forms.CommandLink()
@@ -112,7 +111,6 @@ Partial Class MainForm
         'MainPage
         '
         Me.MainPage.AllowNext = False
-        Me.MainPage.Controls.Add(Me.Label6)
         Me.MainPage.Controls.Add(Me.LinkLabel2)
         Me.MainPage.Controls.Add(Me.CommandLink10)
         Me.MainPage.Controls.Add(Me.CommandLink9)
@@ -123,16 +121,6 @@ Partial Class MainForm
         Me.MainPage.Size = New System.Drawing.Size(587, 307)
         Me.MainPage.TabIndex = 0
         Me.MainPage.Text = "IT管理委員支援ToolKitへようこそ"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(91, 243)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(393, 15)
-        Me.Label6.TabIndex = 1
-        Me.Label6.Text = "重要:言語パックはベータ版です。正確な翻訳が行われていない可能性があります!"
         '
         'LinkLabel2
         '
@@ -665,5 +653,4 @@ Partial Class MainForm
     Friend WithEvents CommandLink10 As CommandLink
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents LinkLabel2 As LinkLabel
-    Friend WithEvents Label6 As Label
 End Class

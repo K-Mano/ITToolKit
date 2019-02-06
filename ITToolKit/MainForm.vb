@@ -8,7 +8,19 @@ Imports iText = iTextSharp.text
 Imports ClosedXML.Excel
 Imports System.Net
 
+'*****************************************************************************************************
+'
+'   ITToolKit(TM) MainForm
+'
+'   Main of this Program
+'
+'   Copyright (c) 2018-2019 ACT Information Dev.org All Rights Reserved.
+'   Licensed under the MIT License.
+'
+'*****************************************************************************************************
+
 Public Class MainForm
+    '関数の宣言----------------------------------
     Public Extentions As String
     Public CurrentLanguage As String
     Dim LanguageAuthor As String
@@ -31,7 +43,13 @@ Public Class MainForm
         {"MACアドレス", ""},
         {"シリアルナンバーの有無", ""}
     }
+    '--------------------------------------------
     Private Sub Maker()
+        '*****************************************************************************************************
+        '
+        '   Description:メーカー情報の取得
+        '
+        '*****************************************************************************************************
         Dim scope As ManagementScope = New ManagementScope("root\cimv2")
         scope.Connect()
         Dim q As ObjectQuery = New ObjectQuery("select Manufacturer,Model from Win32_ComputerSystem")
@@ -43,6 +61,12 @@ Public Class MainForm
         Next
     End Sub
     Private Sub Hardware()
+        '*****************************************************************************************************
+        '
+        '   Description:ハードウェア情報の取得
+        '
+        '*****************************************************************************************************
+
         Dim scope As ManagementScope = New ManagementScope("root\cimv2")
         scope.Connect()
         Dim q As ObjectQuery = New ObjectQuery("select Manufacturer,Model from Win32_ComputerSystem")
@@ -54,6 +78,12 @@ Public Class MainForm
         Next
     End Sub
     Private Sub SerialNumber()
+        '*****************************************************************************************************
+        '
+        '   Description:シリアルナンバー/プロダクトIDの取得
+        '
+        '*****************************************************************************************************
+
         Dim scope As ManagementScope = New ManagementScope("root\cimv2")
         scope.Connect()
         Dim q As ObjectQuery = New ObjectQuery("select SerialNumber from Win32_BIOS")
@@ -78,9 +108,21 @@ Public Class MainForm
         Next
     End Sub
     Private Sub OSVersion()
+        '*****************************************************************************************************
+        '
+        '   Description:OSバージョンの取得
+        '
+        '*****************************************************************************************************
+
         items(3, 1) = My.Computer.Info.OSFullName
     End Sub
     Public Sub MACAddress()
+        '*****************************************************************************************************
+        '
+        '   Description:Wi-Fiボードの物理アドレスの取得
+        '
+        '*****************************************************************************************************
+
         Dim adapters As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
         For Each adapter As NetworkInterface In adapters
             If adapter.Name.Contains("Wi-Fi") Then
@@ -97,20 +139,48 @@ Public Class MainForm
                 items(4, 1) = phymodified
             End If
         Next
+
     End Sub
     Public Sub CommandLink1_Click(sender As Object, e As EventArgs) Handles CommandLink1.Click
+        '*****************************************************************************************************
+        '
+        '   Description:メインページ-情報入力ページに移動
+        '
+        '*****************************************************************************************************
+
         MainPage.NextPage = InfoPage
         WizardControl1.NextPage()
+
     End Sub
 
     Private Sub CommandLink3_Click(sender As Object, e As EventArgs) Handles CommandLink3.Click
+        '*****************************************************************************************************
+        '
+        '   Description:リスト化したデータを名前を付けて保存
+        '
+        '*****************************************************************************************************
+
         SaveFileDialog1.ShowDialog()
+
     End Sub
 
     Private Sub CommandLink5_Click(sender As Object, e As EventArgs) Handles CommandLink5.Click
+        '*****************************************************************************************************
+        '
+        '   Description:データベースへ送信(*未実装)
+        '
+        '*****************************************************************************************************
+
         DataBase.Show()
+
     End Sub
     Private Sub SaveDataListForText()
+        '*****************************************************************************************************
+        '
+        '   Description:(*.txt)で保存
+        '
+        '*****************************************************************************************************
+
         Dim itemx As ListViewItem = New ListViewItem()
         Try
             Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
@@ -123,8 +193,15 @@ Public Class MainForm
         Catch ex As Exception
             MessageBox.Show("ファイルの保存に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
     End Sub
     Private Sub SaveDataListForCSV()
+        '*****************************************************************************************************
+        '
+        '   Description:(*.csv)で保存
+        '
+        '*****************************************************************************************************
+
         phythicsnumber = phythicsnumber.Insert(2, ",")
         phythicsnumber = phythicsnumber.Insert(5, ",")
         phythicsnumber = phythicsnumber.Insert(8, ",")
@@ -146,6 +223,12 @@ Public Class MainForm
         End Try
     End Sub
     Private Sub SaveDataListForXLSX()
+        '*****************************************************************************************************
+        '
+        '   Description:(*.xlsx)で保存
+        '
+        '*****************************************************************************************************
+
         Try
             phythicsnumber = phythicsnumber.Insert(2, ",")
             phythicsnumber = phythicsnumber.Insert(5, ",")
@@ -157,7 +240,7 @@ Public Class MainForm
             Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
             Dim objWBook As New XLWorkbook
             Dim objSheet As IXLWorksheet = objWBook.Worksheets.Add("Sheet1")
-            '----------------------.xlsxブックの内容--------------------------
+            '------------------------.xlsxブックの内容--------------------------
             objSheet.Range("B1:G1").Merge()
             objSheet.Range("B2:G2").Merge()
             objSheet.Range("B3:G3").Merge()
@@ -184,9 +267,16 @@ Public Class MainForm
         Catch ex As Exception
             MessageBox.Show("ファイルの保存に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
     End Sub
 
     Private Sub SaveFileDialog1_FileOk(sender As Object, e As CancelEventArgs) Handles SaveFileDialog1.FileOk
+        '*****************************************************************************************************
+        '
+        '   Description:保存作業
+        '
+        '*****************************************************************************************************
+
         If Path.GetExtension(SaveFileDialog1.FileName).Contains("csv") Then
             SaveDataListForCSV()
         ElseIf Path.GetExtension(SaveFileDialog1.FileName).Contains("txt") Then
@@ -194,12 +284,26 @@ Public Class MainForm
         ElseIf Path.GetExtension(SaveFileDialog1.FileName).Contains("xlsx") Then
             SaveDataListForXLSX()
         End If
+
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        '*****************************************************************************************************
+        '
+        '   Description:バージョン情報の表示
+        '
+        '*****************************************************************************************************
+
         InfomationForm.Show()
+
     End Sub
     Sub RunCMD(strcmd As String)
+        '*****************************************************************************************************
+        '
+        '   Description:バックグラウンド-コマンドを実行
+        '
+        '*****************************************************************************************************
+
         Try
             Dim proc As New Process()
             With proc.StartInfo
@@ -213,8 +317,15 @@ Public Class MainForm
         Catch ex As Exception
             MessageBox.Show("プロキシの設定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
     End Sub
     Private Sub CommandLink6_Click(sender As Object, e As EventArgs) Handles CommandLink6.Click
+        '*****************************************************************************************************
+        '
+        '   Description:プロキシ設定を適用
+        '
+        '*****************************************************************************************************
+
         Dim ShellObj
         ShellObj = CreateObject("WScript.Shell")
         If noneie.Checked Then
@@ -231,6 +342,12 @@ Public Class MainForm
         End If
     End Sub
     Public Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '*****************************************************************************************************
+        '
+        '   Description:MainForm(起動時)
+        '
+        '*****************************************************************************************************
+
         Dim fs As String() = Directory.GetFiles(".\languages", "*.lng")
         Dim f As String
         For Each f In fs
@@ -269,9 +386,16 @@ Public Class MainForm
         Catch ex As Exception
             MessageBox.Show("バージョン情報の格納に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        '*****************************************************************************************************
+        '
+        '   Description:リストのリセット
+        '
+        '*****************************************************************************************************
+
         ListView1.Items.Clear()
         Maker()
         Hardware()
@@ -286,6 +410,7 @@ Public Class MainForm
         For L As Integer = 0 To 5
             ListView1.Items(L).SubItems(0).Font = New Font("Consolas", 9)
         Next
+
     End Sub
 
     Private Sub CommandLink7_Click(sender As Object, e As EventArgs) Handles CommandLink7.Click
@@ -301,6 +426,11 @@ Public Class MainForm
     End Sub
 
     Private Sub CommandLink4_Click(sender As Object, e As EventArgs) Handles CommandLink4.Click
+        '*****************************************************************************************************
+        '
+        '   Description:レポートの表示      '
+        '*****************************************************************************************************
+
         filename = "\Reports\report_" & number & ".pdf"
         Dim filepath As String = My.Application.Info.DirectoryPath & filename
         If license.Length = 0 Then
@@ -546,13 +676,6 @@ Public Class MainForm
             sw.WriteLine(ExtentionsList.Text)
             sw.WriteLine(ExtentionsList.CommandLink1.Text)
             sw.WriteLine(ExtentionsList.CommandLink1.Note)
-            sw.WriteLine(ExtentionsList.ファイルFToolStripMenuItem.Text)
-            sw.WriteLine(ExtentionsList.操作CToolStripMenuItem.Text)
-            sw.WriteLine(ExtentionsList.ヘルプHToolStripMenuItem.Text)
-            sw.WriteLine(ExtentionsList.終了XToolStripMenuItem.Text)
-            sw.WriteLine(ExtentionsList.更新RToolStripMenuItem.Text)
-            sw.WriteLine(ExtentionsList.バージョン情報ToolStripMenuItem.Text)
-            sw.WriteLine(ExtentionsList.GroupBox1.Text)
             sw.WriteLine(ExtentionsList.Label1.Text)
             sw.WriteLine(ExtentionsList.Label2.Text)
             sw.WriteLine(ExtentionsList.Label3.Text)
@@ -649,19 +772,12 @@ Public Class MainForm
             ExtentionsList.Text = langBuffer(67)
             ExtentionsList.CommandLink1.Text = langBuffer(68)
             ExtentionsList.CommandLink1.Note = langBuffer(69)
-            ExtentionsList.ファイルFToolStripMenuItem.Text = langBuffer(70)
-            ExtentionsList.操作CToolStripMenuItem.Text = langBuffer(71)
-            ExtentionsList.ヘルプHToolStripMenuItem.Text = langBuffer(72)
-            ExtentionsList.終了XToolStripMenuItem.Text = langBuffer(73)
-            ExtentionsList.更新RToolStripMenuItem.Text = langBuffer(74)
-            ExtentionsList.バージョン情報ToolStripMenuItem.Text = langBuffer(75)
-            ExtentionsList.GroupBox1.Text = langBuffer(76)
-            ExtentionsList.Label1.Text = langBuffer(77)
-            ExtentionsList.Label2.Text = langBuffer(78)
-            ExtentionsList.Label3.Text = langBuffer(79)
-            ExtentionsList.Label4.Text = langBuffer(80)
-            ExtentionsList.ListView1.Columns(0).Text = langBuffer(81)
-            ExtentionsList.ListView1.Columns(1).Text = langBuffer(82)
+            ExtentionsList.Label1.Text = langBuffer(70)
+            ExtentionsList.Label2.Text = langBuffer(71)
+            ExtentionsList.Label3.Text = langBuffer(72)
+            ExtentionsList.Label4.Text = langBuffer(73)
+            ExtentionsList.ListView1.Columns(0).Text = langBuffer(74)
+            ExtentionsList.ListView1.Columns(1).Text = langBuffer(75)
             MainPage.Text = langBuffer(3)
         Catch ex As Exception
             MessageBox.Show("言語ファイルのロードに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
