@@ -20,11 +20,11 @@ Public Class Settings
         End If
         Dim pf As New StreamWriter(".\languages\Preference.ini", True, Encoding.GetEncoding("shift_jis"))
         pf.WriteLine(ComboBox1.SelectedItem + ".lng")
-        If ListView1.Items(0).Checked Then
-            MainForm.LinkLabel2.Enabled = True
+        If ListView2.Items(0).Checked Then
+            MainForm.Button3.Enabled = True
             pf.WriteLine("Extentions=true")
         Else
-            MainForm.LinkLabel2.Enabled = False
+            MainForm.Button3.Enabled = False
             pf.WriteLine("Extentions=false")
         End If
         pf.Close()
@@ -36,9 +36,9 @@ Public Class Settings
 
     Private Sub Settings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If MainForm.Extentions = "Extentions=true" Then
-            ListView1.Items(0).Checked = True
+            ListView2.Items(0).Checked = True
         Else
-            ListView1.Items(0).Checked = False
+            ListView2.Items(0).Checked = False
         End If
     End Sub
 

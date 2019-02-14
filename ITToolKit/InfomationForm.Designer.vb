@@ -66,7 +66,7 @@ Partial Class InfomationForm
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel.Size = New System.Drawing.Size(728, 362)
+        Me.TableLayoutPanel.Size = New System.Drawing.Size(525, 299)
         Me.TableLayoutPanel.TabIndex = 0
         '
         'LogoPictureBox
@@ -76,7 +76,7 @@ Partial Class InfomationForm
         Me.LogoPictureBox.Location = New System.Drawing.Point(3, 3)
         Me.LogoPictureBox.Name = "LogoPictureBox"
         Me.TableLayoutPanel.SetRowSpan(Me.LogoPictureBox, 6)
-        Me.LogoPictureBox.Size = New System.Drawing.Size(234, 356)
+        Me.LogoPictureBox.Size = New System.Drawing.Size(167, 293)
         Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
@@ -85,11 +85,11 @@ Partial Class InfomationForm
         '
         Me.LabelProductName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LabelProductName.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LabelProductName.Location = New System.Drawing.Point(246, 0)
+        Me.LabelProductName.Location = New System.Drawing.Point(179, 0)
         Me.LabelProductName.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelProductName.MaximumSize = New System.Drawing.Size(0, 16)
         Me.LabelProductName.Name = "LabelProductName"
-        Me.LabelProductName.Size = New System.Drawing.Size(479, 16)
+        Me.LabelProductName.Size = New System.Drawing.Size(343, 16)
         Me.LabelProductName.TabIndex = 0
         Me.LabelProductName.Text = "製品名"
         Me.LabelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -98,11 +98,11 @@ Partial Class InfomationForm
         '
         Me.LabelVersion.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LabelVersion.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LabelVersion.Location = New System.Drawing.Point(246, 36)
+        Me.LabelVersion.Location = New System.Drawing.Point(179, 29)
         Me.LabelVersion.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelVersion.MaximumSize = New System.Drawing.Size(0, 16)
         Me.LabelVersion.Name = "LabelVersion"
-        Me.LabelVersion.Size = New System.Drawing.Size(479, 16)
+        Me.LabelVersion.Size = New System.Drawing.Size(343, 16)
         Me.LabelVersion.TabIndex = 0
         Me.LabelVersion.Text = "バージョン"
         Me.LabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -111,11 +111,11 @@ Partial Class InfomationForm
         '
         Me.LabelCopyright.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LabelCopyright.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LabelCopyright.Location = New System.Drawing.Point(246, 72)
+        Me.LabelCopyright.Location = New System.Drawing.Point(179, 58)
         Me.LabelCopyright.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelCopyright.MaximumSize = New System.Drawing.Size(0, 16)
         Me.LabelCopyright.Name = "LabelCopyright"
-        Me.LabelCopyright.Size = New System.Drawing.Size(479, 16)
+        Me.LabelCopyright.Size = New System.Drawing.Size(343, 16)
         Me.LabelCopyright.TabIndex = 0
         Me.LabelCopyright.Text = "著作権"
         Me.LabelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -124,11 +124,11 @@ Partial Class InfomationForm
         '
         Me.LabelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LabelCompanyName.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.LabelCompanyName.Location = New System.Drawing.Point(246, 108)
+        Me.LabelCompanyName.Location = New System.Drawing.Point(179, 87)
         Me.LabelCompanyName.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelCompanyName.MaximumSize = New System.Drawing.Size(0, 16)
         Me.LabelCompanyName.Name = "LabelCompanyName"
-        Me.LabelCompanyName.Size = New System.Drawing.Size(479, 16)
+        Me.LabelCompanyName.Size = New System.Drawing.Size(343, 16)
         Me.LabelCompanyName.TabIndex = 0
         Me.LabelCompanyName.Text = "会社名"
         Me.LabelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -137,13 +137,13 @@ Partial Class InfomationForm
         '
         Me.TextBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TextBoxDescription.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBoxDescription.Location = New System.Drawing.Point(246, 147)
+        Me.TextBoxDescription.Location = New System.Drawing.Point(179, 119)
         Me.TextBoxDescription.Margin = New System.Windows.Forms.Padding(6, 3, 3, 3)
         Me.TextBoxDescription.Multiline = True
         Me.TextBoxDescription.Name = "TextBoxDescription"
         Me.TextBoxDescription.ReadOnly = True
         Me.TextBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBoxDescription.Size = New System.Drawing.Size(479, 175)
+        Me.TextBoxDescription.Size = New System.Drawing.Size(343, 143)
         Me.TextBoxDescription.TabIndex = 0
         Me.TextBoxDescription.TabStop = False
         Me.TextBoxDescription.Text = resources.GetString("TextBoxDescription.Text")
@@ -154,7 +154,7 @@ Partial Class InfomationForm
         Me.OKButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.OKButton.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.OKButton.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.OKButton.Location = New System.Drawing.Point(650, 334)
+        Me.OKButton.Location = New System.Drawing.Point(447, 271)
         Me.OKButton.Name = "OKButton"
         Me.OKButton.Size = New System.Drawing.Size(75, 25)
         Me.OKButton.TabIndex = 0
@@ -165,7 +165,7 @@ Partial Class InfomationForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.OKButton
-        Me.ClientSize = New System.Drawing.Size(746, 378)
+        Me.ClientSize = New System.Drawing.Size(543, 315)
         Me.Controls.Add(Me.TableLayoutPanel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False

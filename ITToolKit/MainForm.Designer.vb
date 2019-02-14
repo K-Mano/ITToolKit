@@ -26,10 +26,10 @@ Partial Class MainForm
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.WizardControl1 = New AeroWizard.WizardControl()
         Me.MainPage = New AeroWizard.WizardPage()
-        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.CommandLink10 = New System.Windows.Forms.CommandLink()
         Me.CommandLink9 = New System.Windows.Forms.CommandLink()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.CommandLink1 = New System.Windows.Forms.CommandLink()
         Me.InfoPage = New AeroWizard.WizardPage()
         Me.CommandLink8 = New System.Windows.Forms.CommandLink()
@@ -49,10 +49,10 @@ Partial Class MainForm
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DataPage = New AeroWizard.WizardPage()
+        Me.ListView1 = New WindowsFormsAero.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.DataName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Data = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.CommandLink3 = New System.Windows.Forms.CommandLink()
         Me.ProxyPage = New AeroWizard.WizardPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -111,10 +111,10 @@ Partial Class MainForm
         'MainPage
         '
         Me.MainPage.AllowNext = False
-        Me.MainPage.Controls.Add(Me.LinkLabel2)
+        Me.MainPage.Controls.Add(Me.Button4)
+        Me.MainPage.Controls.Add(Me.Button3)
         Me.MainPage.Controls.Add(Me.CommandLink10)
         Me.MainPage.Controls.Add(Me.CommandLink9)
-        Me.MainPage.Controls.Add(Me.LinkLabel1)
         Me.MainPage.Controls.Add(Me.CommandLink1)
         Me.MainPage.Name = "MainPage"
         Me.MainPage.NextPage = Me.InfoPage
@@ -122,15 +122,30 @@ Partial Class MainForm
         Me.MainPage.TabIndex = 0
         Me.MainPage.Text = "IT管理委員支援ToolKitへようこそ"
         '
-        'LinkLabel2
+        'Button4
         '
-        Me.LinkLabel2.AutoSize = True
-        Me.LinkLabel2.Location = New System.Drawing.Point(498, 285)
-        Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.Size = New System.Drawing.Size(55, 15)
-        Me.LinkLabel2.TabIndex = 1
-        Me.LinkLabel2.TabStop = True
-        Me.LinkLabel2.Text = "拡張機能"
+        Me.Button4.BackColor = System.Drawing.Color.White
+        Me.Button4.FlatAppearance.BorderSize = 0
+        Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Location = New System.Drawing.Point(13, 268)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(100, 30)
+        Me.Button4.TabIndex = 1
+        Me.Button4.Text = "バージョン情報(&V)"
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Location = New System.Drawing.Point(474, 268)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(100, 30)
+        Me.Button3.TabIndex = 1
+        Me.Button3.Text = "拡張機能(&E)"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'CommandLink10
         '
@@ -153,16 +168,6 @@ Partial Class MainForm
         Me.CommandLink9.TabIndex = 1
         Me.CommandLink9.Text = "設定の変更(&S)"
         Me.CommandLink9.UseVisualStyleBackColor = True
-        '
-        'LinkLabel1
-        '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(5, 285)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(75, 15)
-        Me.LinkLabel1.TabIndex = 12
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "バージョン情報"
         '
         'CommandLink1
         '
@@ -261,9 +266,10 @@ Partial Class MainForm
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(338, 47)
+        Me.CheckBox1.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.CheckBox1.Location = New System.Drawing.Point(335, 47)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(86, 19)
+        Me.CheckBox1.Size = New System.Drawing.Size(92, 20)
         Me.CheckBox1.TabIndex = 7
         Me.CheckBox1.Text = "短期留学生"
         Me.CheckBox1.UseVisualStyleBackColor = True
@@ -356,13 +362,36 @@ Partial Class MainForm
         '
         'DataPage
         '
-        Me.DataPage.Controls.Add(Me.Button1)
         Me.DataPage.Controls.Add(Me.ListView1)
+        Me.DataPage.Controls.Add(Me.Button1)
         Me.DataPage.Controls.Add(Me.CommandLink3)
         Me.DataPage.Name = "DataPage"
         Me.DataPage.Size = New System.Drawing.Size(587, 307)
         Me.DataPage.TabIndex = 1
         Me.DataPage.Text = "システム情報の確認"
+        '
+        'ListView1
+        '
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.ListView1.FullRowSelect = True
+        Me.ListView1.GridLines = True
+        Me.ListView1.Location = New System.Drawing.Point(3, 3)
+        Me.ListView1.MultiSelect = False
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(550, 179)
+        Me.ListView1.TabIndex = 1
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "名称"
+        Me.ColumnHeader1.Width = 160
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "固有データ"
+        Me.ColumnHeader2.Width = 300
         '
         'Button1
         '
@@ -374,31 +403,6 @@ Partial Class MainForm
         Me.Button1.TabIndex = 7
         Me.Button1.Text = "更新(&R)"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'ListView1
-        '
-        Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.DataName, Me.Data})
-        Me.ListView1.Font = New System.Drawing.Font("Yu Gothic UI", 9.0!)
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(3, 3)
-        Me.ListView1.MultiSelect = False
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(550, 179)
-        Me.ListView1.TabIndex = 8
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
-        '
-        'DataName
-        '
-        Me.DataName.Text = "名称"
-        Me.DataName.Width = 160
-        '
-        'Data
-        '
-        Me.Data.Text = "固有データ"
-        Me.Data.Width = 300
         '
         'CommandLink3
         '
@@ -508,7 +512,7 @@ Partial Class MainForm
         '
         'CommandLink6
         '
-        Me.CommandLink6.Location = New System.Drawing.Point(2, 218)
+        Me.CommandLink6.Location = New System.Drawing.Point(3, 229)
         Me.CommandLink6.Name = "CommandLink6"
         Me.CommandLink6.Note = "すべての設定を反映します。"
         Me.CommandLink6.ShowShield = True
@@ -546,7 +550,7 @@ Partial Class MainForm
         '
         Me.CommandLink7.Location = New System.Drawing.Point(3, 183)
         Me.CommandLink7.Name = "CommandLink7"
-        Me.CommandLink7.Note = "アプリケーションを終了します。"
+        Me.CommandLink7.Note = "セットアップレポートを出力してアプリケーションを終了します。"
         Me.CommandLink7.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink7.TabIndex = 18
         Me.CommandLink7.Text = "終了(&X)"
@@ -569,7 +573,7 @@ Partial Class MainForm
         Me.CommandLink4.Icon = CType(resources.GetObject("CommandLink4.Icon"), System.Drawing.Icon)
         Me.CommandLink4.Location = New System.Drawing.Point(3, 21)
         Me.CommandLink4.Name = "CommandLink4"
-        Me.CommandLink4.Note = "収集したデータをPC許可願のフォーマットで出力します。"
+        Me.CommandLink4.Note = "収集したデータをPC許可願のフォーマットで出力します。(*未実装)"
         Me.CommandLink4.Size = New System.Drawing.Size(550, 75)
         Me.CommandLink4.TabIndex = 16
         Me.CommandLink4.Text = "PC持込許可願の出力(&A)"
@@ -589,7 +593,6 @@ Partial Class MainForm
         Me.Text = "IT管理委員支援ToolKit"
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MainPage.ResumeLayout(False)
-        Me.MainPage.PerformLayout()
         Me.InfoPage.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
@@ -615,11 +618,7 @@ Partial Class MainForm
     Friend WithEvents ProxyPage As AeroWizard.WizardPage
     Friend WithEvents FinishPage As AeroWizard.WizardPage
     Friend WithEvents CommandLink2 As CommandLink
-    Friend WithEvents CommandLink1 As CommandLink
     Friend WithEvents Button1 As Button
-    Friend WithEvents ListView1 As ListView
-    Friend WithEvents DataName As ColumnHeader
-    Friend WithEvents Data As ColumnHeader
     Friend WithEvents CommandLink3 As CommandLink
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents actie As RadioButton
@@ -628,7 +627,6 @@ Partial Class MainForm
     Friend WithEvents actsys As RadioButton
     Friend WithEvents nonesys As RadioButton
     Friend WithEvents CommandLink6 As CommandLink
-    Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents CommandLink7 As CommandLink
     Friend WithEvents CommandLink5 As CommandLink
     Friend WithEvents CommandLink4 As CommandLink
@@ -652,5 +650,10 @@ Partial Class MainForm
     Friend WithEvents Button2 As Button
     Friend WithEvents CommandLink10 As CommandLink
     Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents LinkLabel2 As LinkLabel
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents CommandLink1 As CommandLink
+    Friend WithEvents ListView1 As WindowsFormsAero.ListView
+    Friend WithEvents ColumnHeader1 As ColumnHeader
+    Friend WithEvents ColumnHeader2 As ColumnHeader
 End Class

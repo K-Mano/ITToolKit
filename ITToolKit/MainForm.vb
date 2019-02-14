@@ -287,16 +287,6 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        '*****************************************************************************************************
-        '
-        '   Description:バージョン情報の表示
-        '
-        '*****************************************************************************************************
-
-        InfomationForm.Show()
-
-    End Sub
     Sub RunCMD(strcmd As String)
         '*****************************************************************************************************
         '
@@ -306,12 +296,10 @@ Public Class MainForm
 
         Try
             Dim proc As New Process()
-            With proc.StartInfo
-                .FileName = Environment.GetEnvironmentVariable("ComSpec")
-                .CreateNoWindow = True
-                .Arguments = "/c " & strcmd
-            End With
-            proc.Start()
+            proc.StartInfo.FileName = Environment.GetEnvironmentVariable("ComSpec")
+            proc.StartInfo.CreateNoWindow = True
+                proc.StartInfo.Arguments = "/c " & strcmd
+                proc.Start()
             proc.WaitForExit()
             proc.Close()
         Catch ex As Exception
@@ -347,12 +335,15 @@ Public Class MainForm
         '   Description:MainForm(起動時)
         '
         '*****************************************************************************************************
+        Try
+            Dim fs As String() = Directory.GetFiles(".\languages", "*.lng")
+            Dim f As String
+            For Each f In fs
+                Settings.ComboBox1.Items.Add(Path.GetFileNameWithoutExtension(f))
+            Next
+        Catch ex As Exception
 
-        Dim fs As String() = Directory.GetFiles(".\languages", "*.lng")
-        Dim f As String
-        For Each f In fs
-            Settings.ComboBox1.Items.Add(Path.GetFileNameWithoutExtension(f))
-        Next
+        End Try
         LoadSettings()
         Initialization()
         LoadLanguages(CurrentLanguage)
@@ -390,6 +381,7 @@ Public Class MainForm
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
         '*****************************************************************************************************
         '
         '   Description:リストのリセット
@@ -414,6 +406,15 @@ Public Class MainForm
     End Sub
 
     Private Sub CommandLink7_Click(sender As Object, e As EventArgs) Handles CommandLink7.Click
+        filename = "\Reports\report_" & number & ".pdf"
+        Dim filepath As String = My.Application.Info.DirectoryPath & filename
+        If license.Length = 0 Then
+            license = "無し"
+        End If
+        If File.Exists(filepath) Then
+            File.Delete(filepath)
+        End If
+        CreatePdf(filepath)
         End
     End Sub
 
@@ -428,40 +429,18 @@ Public Class MainForm
     Private Sub CommandLink4_Click(sender As Object, e As EventArgs) Handles CommandLink4.Click
         '*****************************************************************************************************
         '
-        '   Description:レポートの表示      '
+        '   Description:PC持込願の表示
+        '
         '*****************************************************************************************************
-
-        filename = "\Reports\report_" & number & ".pdf"
-        Dim filepath As String = My.Application.Info.DirectoryPath & filename
-        If license.Length = 0 Then
-            license = "無し"
-        End If
-        If itname = "(選択してください)" Then
-            itname = "[使用者不明]"
-        End If
-        CreatePdf(filepath)
-        Try
-            Report.AxAcroPDF1.LoadFile(filepath)
-            Report.Show()
-        Catch ex As Exception
-            MessageBox.Show("Adobe Acrobatがインストールされていないため、レポートを表示できませんでした。(レポートは自動で保存されています。)", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End Try
     End Sub
 
     Private Sub CommandLink8_Click(sender As Object, e As EventArgs) Handles CommandLink8.Click
-        If CheckBox1.Checked Then
-            If ComboBox1.Text.Length > 0 Then
-                If TextBox2.TextLength > 0 Then
-                    If TextBox4.TextLength = 9 Then
-                        If ComboBox1.SelectedItem = "ESET" Then
-                            antivirus = ComboBox1.SelectedItem
-                            license = TextBox1.Text
-                            username = TextBox2.Text
-                            number = TextBox4.Text
-                            itname = ComboBox2.SelectedItem
-                            WizardControl1.NextPage()
-                        Else
-                            If TextBox1.TextLength > 0 Then
+        If ComboBox2.Text <> "(選択してください)" Then
+            If CheckBox1.Checked Then
+                If ComboBox1.Text.Length > 0 Then
+                    If TextBox2.TextLength > 0 Then
+                        If TextBox4.TextLength = 9 Then
+                            If ComboBox1.SelectedItem = "ESET" Then
                                 antivirus = ComboBox1.SelectedItem
                                 license = TextBox1.Text
                                 username = TextBox2.Text
@@ -469,50 +448,61 @@ Public Class MainForm
                                 itname = ComboBox2.SelectedItem
                                 WizardControl1.NextPage()
                             Else
-                                MessageBox.Show("ライセンスキーを入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                If TextBox1.TextLength > 0 Then
+                                    antivirus = ComboBox1.SelectedItem
+                                    license = TextBox1.Text
+                                    username = TextBox2.Text
+                                    number = TextBox4.Text
+                                    itname = ComboBox2.SelectedItem
+                                    WizardControl1.NextPage()
+                                Else
+                                    MessageBox.Show("ライセンスキーを入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End If
                             End If
+                        Else
+                            MessageBox.Show("学籍番号を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         End If
                     Else
-                        MessageBox.Show("学籍番号を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        MessageBox.Show("申請者の名前を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
                 Else
-                    MessageBox.Show("申請者の名前を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("ウイルス対策ソフトウェアを選択または入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             Else
-                MessageBox.Show("ウイルス対策ソフトウェアを選択または入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If ComboBox1.Text.Length > 0 Then
+                    If TextBox2.TextLength > 0 Then
+                        If TextBox4.TextLength = 7 Then
+                            If ComboBox1.SelectedItem = "ESET" Then
+                                antivirus = ComboBox1.SelectedItem
+                                license = TextBox1.Text
+                                username = TextBox2.Text
+                                number = TextBox4.Text
+                                itname = ComboBox2.SelectedItem
+                                WizardControl1.NextPage()
+                            Else
+                                If TextBox1.TextLength > 0 Then
+                                    antivirus = ComboBox1.SelectedItem
+                                    license = TextBox1.Text
+                                    username = TextBox2.Text
+                                    number = TextBox4.Text
+                                    itname = ComboBox2.SelectedItem
+                                    WizardControl1.NextPage()
+                                Else
+                                    MessageBox.Show("ライセンスキーを入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End If
+                            End If
+                        Else
+                            MessageBox.Show("学籍番号を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
+                    Else
+                        MessageBox.Show("申請者の名前を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                Else
+                    MessageBox.Show("ウイルス対策ソフトウェアを選択または入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
             End If
         Else
-            If ComboBox1.Text.Length > 0 Then
-                If TextBox2.TextLength > 0 Then
-                    If TextBox4.TextLength = 7 Then
-                        If ComboBox1.SelectedItem = "ESET" Then
-                            antivirus = ComboBox1.SelectedItem
-                            license = TextBox1.Text
-                            username = TextBox2.Text
-                            number = TextBox4.Text
-                            itname = ComboBox2.SelectedItem
-                            WizardControl1.NextPage()
-                        Else
-                            If TextBox1.TextLength > 0 Then
-                                antivirus = ComboBox1.SelectedItem
-                                license = TextBox1.Text
-                                username = TextBox2.Text
-                                number = TextBox4.Text
-                                itname = ComboBox2.SelectedItem
-                                WizardControl1.NextPage()
-                            Else
-                                MessageBox.Show("ライセンスキーを入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            End If
-                        End If
-                    Else
-                        MessageBox.Show("学籍番号を正しく入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                Else
-                    MessageBox.Show("申請者の名前を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-            Else
-                MessageBox.Show("ウイルス対策ソフトウェアを選択または入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            MessageBox.Show("IT管理委員の名前を選択または入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
     Public Sub CreatePdf(savepath As String)
@@ -587,9 +577,9 @@ Public Class MainForm
             Extentions = cReader.ReadLine
             cReader.Close()
             If Extentions = "Extentions=true" Then
-                LinkLabel2.Enabled = True
+                Button3.Enabled = True
             Else
-                LinkLabel2.Enabled = False
+                Button3.Enabled = False
             End If
         Else
             Dim pf As New StreamWriter(".\languages\Preference.ini", True, Encoding.GetEncoding("shift_jis"))
@@ -609,7 +599,7 @@ Public Class MainForm
             sw.WriteLine(CommandLink9.Note)
             sw.WriteLine(CommandLink10.Text)
             sw.WriteLine(CommandLink10.Note)
-            sw.WriteLine(LinkLabel1.Text)
+            sw.WriteLine(Button4.Text)
             sw.WriteLine(WizardControl1.BackButtonToolTipText)
             sw.WriteLine(WizardControl1.CancelButtonText)
             sw.WriteLine(WizardControl1.NextButtonText)
@@ -669,9 +659,9 @@ Public Class MainForm
             sw.WriteLine(Settings.Button2.Text)
             sw.WriteLine(Settings.Label2.Text)
             sw.WriteLine(Settings.GroupBox2.Text)
-            sw.WriteLine(Settings.ListView1.Columns(0).Text)
-            sw.WriteLine(Settings.ListView1.Items(0).Text)
-            sw.WriteLine(Settings.ListView1.Items(1).Text)
+            sw.WriteLine(Settings.ListView2.Columns(0).Text)
+            sw.WriteLine(Settings.ListView2.Items(0).Text)
+            sw.WriteLine(Settings.ListView2.Items(1).Text)
             '拡張機能ウィンドウ
             sw.WriteLine(ExtentionsList.Text)
             sw.WriteLine(ExtentionsList.CommandLink1.Text)
@@ -705,7 +695,7 @@ Public Class MainForm
             CommandLink9.Note = langBuffer(7)
             CommandLink10.Text = langBuffer(8)
             CommandLink10.Note = langBuffer(9)
-            LinkLabel1.Text = langBuffer(10)
+            Button4.Text = langBuffer(10)
             WizardControl1.BackButtonToolTipText = langBuffer(11)
             WizardControl1.CancelButtonText = langBuffer(12)
             WizardControl1.NextButtonText = langBuffer(13)
@@ -765,9 +755,9 @@ Public Class MainForm
             Settings.Button2.Text = langBuffer(61)
             Settings.Label2.Text = langBuffer(62)
             Settings.GroupBox2.Text = langBuffer(63)
-            Settings.ListView1.Columns(0).Text = langBuffer(64)
-            Settings.ListView1.Items(0).Text = langBuffer(65)
-            Settings.ListView1.Items(1).Text = langBuffer(66)
+            Settings.ListView2.Columns(0).Text = langBuffer(64)
+            Settings.ListView2.Items(0).Text = langBuffer(65)
+            Settings.ListView2.Items(1).Text = langBuffer(66)
             '拡張機能ウィンドウ
             ExtentionsList.Text = langBuffer(67)
             ExtentionsList.CommandLink1.Text = langBuffer(68)
@@ -802,7 +792,7 @@ Public Class MainForm
             End If
             downloadClient.DownloadFileAsync(nu, newbuild)
         Catch ex As Exception
-            MessageBox.Show("アップデート情報の取得に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("アップデート情報の取得に失敗しました。" + ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -838,7 +828,17 @@ Public Class MainForm
         End If
     End Sub
 
-    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         ExtentionsList.Show()
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        '*****************************************************************************************************
+        '
+        '   Description:バージョン情報の表示
+        '
+        '*****************************************************************************************************
+
+        InfomationForm.Show()
     End Sub
 End Class

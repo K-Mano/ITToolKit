@@ -22,13 +22,11 @@ Partial Class Settings
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("拡張機能のロード")
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("拡張機能の有効化")
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("パスワードが必要(*未実装)")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Settings))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.設定項目 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -36,6 +34,8 @@ Partial Class Settings
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.ListView2 = New WindowsFormsAero.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -54,35 +54,13 @@ Partial Class Settings
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.ListView1)
+        Me.GroupBox2.Controls.Add(Me.ListView2)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 116)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(342, 178)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "その他"
-        '
-        'ListView1
-        '
-        Me.ListView1.CheckBoxes = True
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.設定項目})
-        Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ListView1.GridLines = True
-        Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        ListViewItem1.StateImageIndex = 0
-        ListViewItem2.StateImageIndex = 0
-        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
-        Me.ListView1.Location = New System.Drawing.Point(3, 21)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(336, 154)
-        Me.ListView1.TabIndex = 0
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
-        '
-        '設定項目
-        '
-        Me.設定項目.Text = "設定項目"
-        Me.設定項目.Width = 200
         '
         'GroupBox1
         '
@@ -157,6 +135,29 @@ Partial Class Settings
         Me.Button2.Text = "適用(&A)"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'ListView2
+        '
+        Me.ListView2.CheckBoxes = True
+        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
+        Me.ListView2.FullRowSelect = True
+        Me.ListView2.GridLines = True
+        ListViewItem1.StateImageIndex = 0
+        ListViewItem1.ToolTipText = "拡張機能を有効化または無効化します。"
+        ListViewItem2.StateImageIndex = 0
+        Me.ListView2.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
+        Me.ListView2.Location = New System.Drawing.Point(6, 24)
+        Me.ListView2.MultiSelect = False
+        Me.ListView2.Name = "ListView2"
+        Me.ListView2.Size = New System.Drawing.Size(330, 148)
+        Me.ListView2.TabIndex = 1
+        Me.ListView2.UseCompatibleStateImageBehavior = False
+        Me.ListView2.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "設定項目"
+        Me.ColumnHeader1.Width = 300
+        '
         'Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -191,6 +192,6 @@ Partial Class Settings
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents ListView1 As ListView
-    Friend WithEvents 設定項目 As ColumnHeader
+    Friend WithEvents ListView2 As WindowsFormsAero.ListView
+    Friend WithEvents ColumnHeader1 As ColumnHeader
 End Class

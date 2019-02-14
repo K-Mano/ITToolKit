@@ -13,6 +13,8 @@ Imports System.Reflection
 '*****************************************************************************************************
 
 Public Class ExtentionsList
+    Dim classname As String
+    Dim instance_base As Object
     Private Sub ExtentionsList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadExtentions()
     End Sub
@@ -49,7 +51,7 @@ Public Class ExtentionsList
                 Dim itemx As ListViewItem = ListView1.SelectedItems(0)
                 Dim asm As Assembly = Assembly.LoadFrom(".\extentions\" & itemx.Text)
                 Dim classname As String = itemx.Text.Replace(".dll", String.Empty)
-                Dim instance_base As Object = Activator.CreateInstance(asm.GetType(classname & "." & classname))
+                instance_base = Activator.CreateInstance(asm.GetType(classname & "." & classname))
                 Label5.Text = instance_base.ext_name
                 Label6.Text = instance_base.ext_auth
                 Label7.Text = instance_base.ext_desc
@@ -70,7 +72,17 @@ Public Class ExtentionsList
             Dim asm As Assembly = Assembly.LoadFrom(".\extentions\" & itemx.Text)
             Dim instance As Object = Activator.CreateInstance(asm.GetType(itemx.Text.Replace(".dll", String.Empty) & ".MainForm"))
             Dim extform As Form = CType(instance, Form)
-            extform.Show()
+            If instance_base.ext_auth <> "K-Mano@ACT-Information-Development.org" Then
+                Dim ans As DialogResult = MessageBox.Show("重要:これはサードパーティ製の拡張機能です。このプログラムの拡張機能では管理者権限でコードを実行することができるため、危険である可能性があります。起動しますか?", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+                If ans = DialogResult.OK Then
+                    extform.Show()
+                ElseIf ans = DialogResult.Cancel Then
+                    Close()
+                End If
+            ElseIf instance_base.ext_auth = "K-Mano@ACT-Information-Development.org" Then
+                extform.Show()
+            End If
+
         Catch ex As Exception
             MessageBox.Show("拡張機能のロードに失敗しました。(" & ex.Message & ")", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
