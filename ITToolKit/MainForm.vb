@@ -368,12 +368,11 @@ Public Class MainForm
         ComboBox1.SelectedItem = "ESET"
         Try
             If File.Exists(nowbuild) Then
-
-            Else
-                Dim vw As New StreamWriter(nowbuild, False, Encoding.GetEncoding("shift_jis"))
-                vw.Write(My.Application.Info.Version)
-                vw.Close()
+                File.Delete(nowbuild)
             End If
+            Dim vw As New StreamWriter(nowbuild, False, Encoding.GetEncoding("shift_jis"))
+            vw.Write(My.Application.Info.Version)
+            vw.Close()
         Catch ex As Exception
             MessageBox.Show("バージョン情報の格納に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
