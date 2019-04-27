@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("ITToolKit")>
 <Assembly: AssemblyDescription("IT管理委員支援ソフトウェア")>
-<Assembly: AssemblyCompany("ACT Information Development.org")>
+<Assembly: AssemblyCompany("K-Mano Development")>
 <Assembly: AssemblyProduct("ITToolKit™")>
-<Assembly: AssemblyCopyright("Copyright © 2018-2019 ACT Information Dev.org All Rights Reserved.")>
+<Assembly: AssemblyCopyright("Copyright © 2018-2019 K-Mano Development All Rights Reserved.")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

@@ -43,7 +43,6 @@ Public Class MainForm
         {"MACアドレス", ""},
         {"シリアルナンバーの有無", ""}
     }
-    '--------------------------------------------
     Private Sub Maker()
         '*****************************************************************************************************
         '
@@ -201,12 +200,11 @@ Public Class MainForm
         '   Description:(*.csv)で保存
         '
         '*****************************************************************************************************
-
-        phythicsnumber = phythicsnumber.Insert(2, ",")
-        phythicsnumber = phythicsnumber.Insert(5, ",")
-        phythicsnumber = phythicsnumber.Insert(8, ",")
-        phythicsnumber = phythicsnumber.Insert(11, ",")
-        phythicsnumber = phythicsnumber.Insert(14, ",")
+        Dim L As Integer = 2
+        For I As Integer = 0 To 4
+            phythicsnumber = phythicsnumber.Insert(L, ",")
+            L = L + 3
+        Next
         Dim itemx As ListViewItem = New ListViewItem()
         Try
             Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
@@ -230,11 +228,11 @@ Public Class MainForm
         '*****************************************************************************************************
 
         Try
-            phythicsnumber = phythicsnumber.Insert(2, ",")
-            phythicsnumber = phythicsnumber.Insert(5, ",")
-            phythicsnumber = phythicsnumber.Insert(8, ",")
-            phythicsnumber = phythicsnumber.Insert(11, ",")
-            phythicsnumber = phythicsnumber.Insert(14, ",")
+            Dim L As Integer = 2
+            For I As Integer = 0 To 4
+                phythicsnumber = phythicsnumber.Insert(L, ",")
+                L = L + 3
+            Next
             Dim delim As Char = ","
             Dim destArr As String() = Split(phythicsnumber, delim, -1)
             Dim path As String = IO.Path.GetFullPath(SaveFileDialog1.FileName)
@@ -277,11 +275,11 @@ Public Class MainForm
         '
         '*****************************************************************************************************
 
-        If Path.GetExtension(SaveFileDialog1.FileName).Contains("csv") Then
+        If Path.GetExtension(SaveFileDialog1.FileName).Contains(".csv") Then
             SaveDataListForCSV()
-        ElseIf Path.GetExtension(SaveFileDialog1.FileName).Contains("txt") Then
+        ElseIf Path.GetExtension(SaveFileDialog1.FileName).Contains(".txt") Then
             SaveDataListForText()
-        ElseIf Path.GetExtension(SaveFileDialog1.FileName).Contains("xlsx") Then
+        ElseIf Path.GetExtension(SaveFileDialog1.FileName).Contains(".xlsx") Then
             SaveDataListForXLSX()
         End If
 
@@ -335,14 +333,13 @@ Public Class MainForm
         '   Description:MainForm(起動時)
         '
         '*****************************************************************************************************
-        Try
+        Try　'言語パックのロード試行
             Dim fs As String() = Directory.GetFiles(".\languages", "*.lng")
             Dim f As String
             For Each f In fs
                 Settings.ComboBox1.Items.Add(Path.GetFileNameWithoutExtension(f))
             Next
         Catch ex As Exception
-
         End Try
         LoadSettings()
         Initialization()
@@ -428,7 +425,7 @@ Public Class MainForm
     Private Sub CommandLink4_Click(sender As Object, e As EventArgs) Handles CommandLink4.Click
         '*****************************************************************************************************
         '
-        '   Description:PC持込願の表示
+        '   Description:PC持込願の保存
         '
         '*****************************************************************************************************
     End Sub
@@ -587,7 +584,7 @@ Public Class MainForm
             pf.Close()
             Dim sw As New StreamWriter(".\languages\Japanese.lng", True, Encoding.GetEncoding("shift_jis"))
             '言語パックタイトル
-            sw.WriteLine("Japanese(日本語) by K-Mano@nsip.org")
+            sw.WriteLine("Japanese(日本語) by K-Mano")
             'MainPage
             sw.WriteLine(Text)
             sw.WriteLine(WizardControl1.Title)
@@ -640,16 +637,6 @@ Public Class MainForm
             sw.WriteLine(CommandLink5.Note)
             sw.WriteLine(CommandLink7.Text)
             sw.WriteLine(CommandLink7.Note)
-            'PDFのプレビューウィンドウ
-            sw.WriteLine(Report.Text)
-            sw.WriteLine(Report.ファイルFToolStripMenuItem.Text)
-            sw.WriteLine(Report.表示VToolStripMenuItem.Text)
-            sw.WriteLine(Report.更新RToolStripMenuItem.Text)
-            sw.WriteLine(Report.操作AToolStripMenuItem.Text)
-            sw.WriteLine(Report.名前を付けて保存AToolStripMenuItem.Text)
-            sw.WriteLine(Report.ヘルプHToolStripMenuItem.Text)
-            sw.WriteLine(Report.バージョン情報VToolStripMenuItem.Text)
-            sw.WriteLine(Report.セットアップに戻るEToolStripMenuItem.Text)
             '設定ウィンドウ
             sw.WriteLine(Settings.Text)
             sw.WriteLine(Settings.GroupBox1.Text)
@@ -736,37 +723,27 @@ Public Class MainForm
             CommandLink5.Note = langBuffer(45)
             CommandLink7.Text = langBuffer(46)
             CommandLink7.Note = langBuffer(47)
-            'PDFのプレビューウィンドウ
-            Report.Text = langBuffer(48)
-            Report.ファイルFToolStripMenuItem.Text = langBuffer(49)
-            Report.表示VToolStripMenuItem.Text = langBuffer(50)
-            Report.更新RToolStripMenuItem.Text = langBuffer(51)
-            Report.操作AToolStripMenuItem.Text = langBuffer(52)
-            Report.名前を付けて保存AToolStripMenuItem.Text = langBuffer(53)
-            Report.ヘルプHToolStripMenuItem.Text = langBuffer(54)
-            Report.バージョン情報VToolStripMenuItem.Text = langBuffer(55)
-            Report.セットアップに戻るEToolStripMenuItem.Text = langBuffer(56)
             '設定ウィンドウ
-            Settings.Text = langBuffer(57)
-            Settings.GroupBox1.Text = langBuffer(58)
-            Settings.Label1.Text = langBuffer(59)
-            Settings.Button1.Text = langBuffer(60)
-            Settings.Button2.Text = langBuffer(61)
-            Settings.Label2.Text = langBuffer(62)
-            Settings.GroupBox2.Text = langBuffer(63)
-            Settings.ListView2.Columns(0).Text = langBuffer(64)
-            Settings.ListView2.Items(0).Text = langBuffer(65)
-            Settings.ListView2.Items(1).Text = langBuffer(66)
+            Settings.Text = langBuffer(48)
+            Settings.GroupBox1.Text = langBuffer(49)
+            Settings.Label1.Text = langBuffer(50)
+            Settings.Button1.Text = langBuffer(51)
+            Settings.Button2.Text = langBuffer(52)
+            Settings.Label2.Text = langBuffer(53)
+            Settings.GroupBox2.Text = langBuffer(54)
+            Settings.ListView2.Columns(0).Text = langBuffer(55)
+            Settings.ListView2.Items(0).Text = langBuffer(56)
+            Settings.ListView2.Items(1).Text = langBuffer(57)
             '拡張機能ウィンドウ
-            ExtentionsList.Text = langBuffer(67)
-            ExtentionsList.CommandLink1.Text = langBuffer(68)
-            ExtentionsList.CommandLink1.Note = langBuffer(69)
-            ExtentionsList.Label1.Text = langBuffer(70)
-            ExtentionsList.Label2.Text = langBuffer(71)
-            ExtentionsList.Label3.Text = langBuffer(72)
-            ExtentionsList.Label4.Text = langBuffer(73)
-            ExtentionsList.ListView1.Columns(0).Text = langBuffer(74)
-            ExtentionsList.ListView1.Columns(1).Text = langBuffer(75)
+            ExtentionsList.Text = langBuffer(58)
+            ExtentionsList.CommandLink1.Text = langBuffer(59)
+            ExtentionsList.CommandLink1.Note = langBuffer(60)
+            ExtentionsList.Label1.Text = langBuffer(61)
+            ExtentionsList.Label2.Text = langBuffer(62)
+            ExtentionsList.Label3.Text = langBuffer(63)
+            ExtentionsList.Label4.Text = langBuffer(64)
+            ExtentionsList.ListView1.Columns(0).Text = langBuffer(65)
+            ExtentionsList.ListView1.Columns(1).Text = langBuffer(66)
             MainPage.Text = langBuffer(3)
         Catch ex As Exception
             MessageBox.Show("言語ファイルのロードに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
